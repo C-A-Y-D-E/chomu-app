@@ -1,0 +1,314 @@
+{% extends 'companymaster/base.html' %}
+{% load static %}
+{% csrf_token %}
+{% block content %}
+
+
+
+
+<div class="container-fluid" id="headerbx" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+	<div class="container-fluid filtersearch">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="headingbg">
+					<h5 data-toggle="collapse" data-target="#demo"><i class="icofont-search-1"></i> Company Search <i
+							class="fa fa-angle-double-down faa-bounce animated" aria-hidden="true"></i> </h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container-fluid collapse" id="demo" style="margin-top:-0px;">
+	<div class="container-fluid whitepatch" style="padding-top:10px;">
+		<div class="row">
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Company Name</label>
+					<!-- <input class="dtfc form-control" type="text" placeholder="Text..."/>  -->
+					{{search_form.company}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Symbol</label>
+					{{search_form.symbol}}
+				</div>
+			</div>
+
+			<!--<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Country</label>
+					{{search_form.country}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Type of Offer</label>
+					{{search_form.type_of_offer}}
+				</div>
+			</div>-->
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">CIK</label>
+					{{search_form.cik}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">CUSIP</label>
+					{{search_form.cusip}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">ISIN</label>
+					{{search_form.isin}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">LEI</label>
+					{{search_form.lei}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">SEDOL</label>
+					{{search_form.sedol}}
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">SIC Code</label>
+					{{search_form.sic_code}}
+				</div>
+			</div>
+
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+				<button onclick="submitForm()" type="button" class="btn-sm btn btn-info mt_t collapsed"
+					data-toggle="collapse" data-target="#demo" aria-expanded="false"><i class="icofont-search-1"></i>
+					Search</button>
+				<button onclick="resetForm()" type="button" class="btn-sm  btn mt_t"><i class="icofont-refresh"></i> Reset</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container-fluid" id="contentmaindiv">
+	<div class="container-fluid whitepatch">
+
+		<div class="tp_side">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-10">
+					<h3 class="tb_head"><i class="icofont-search-1"></i> Search Company</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-2">
+					<a href="/addcompany" type="button" class="btn-sm btn-info btn fl_rg shw"><i
+							class="icofont-plus"></i> <span>Add Company</span></a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="table-responsive">
+			<table id="example2" class="display" style="width:100%">
+				<thead>
+					<tr>
+						<th class="l">Company Name</th>
+						<th class="c">Symbol</th>
+						<th class="c">Country</th>
+						<th class="c">Year End</th>
+					</tr>
+
+				</thead>
+
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid" id="contentmaindiv">
+	<div class="container-fluid whitepatch">
+
+		<div class="tp_side">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-10">
+					<h3 class="tb_head"><i class="icofont-search-1"></i> Search Offerings</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-2">
+					<a href="/add-offering" type="button" class="btn-sm btn-info btn fl_rg shw"><i
+							class="icofont-plus"></i> <span>Add Offering</span></a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<div class="table-responsive">
+			<table id="example3" class="display" style="width:100%">
+				<thead>
+					<tr>
+						<th>Type</th>						
+						<th class="l">Annoncement Date</th>						
+						<th class="c">Start Date</th>						
+						<th class="c">End Date</th>						
+						<th class="c">Listing Date</th>						
+						<th class="c">Listing Status</th>						
+						<th class="c"></th>
+					</tr>
+				</thead>
+
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div><!-- all other page content start -->
+
+<div id="footer">
+	<div class="container-fluid">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 2.4.0
+		</div>
+		Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a> All
+		rights reserved.
+	</div>
+</div>
+</div>
+<!-------------Main container start--------------->
+<script>
+	function submitForm() {
+		start_loading();
+		if ($('#id_company').val() != null || $('#id_symbol').val() != '' || $('#id_cik').val() != '' || $('#id_cusip').val() != '' || $('#id_isin').val() != '' || $('#id_lei').val() != '' || $('#id_sedol').val() != '' || $('#id_sic_code').val() != ''){
+			var url = "{% url 'ipo-search' %}";
+			var data = {};
+			data['company'] = $("#id_company").val();
+			data['symbol'] = $("#id_symbol").val();
+			data['cik'] = $("#id_cik").val();
+			data['cusip'] = $("#id_cusip").val();
+			data['isin'] = $("#id_isin").val();
+			data['lei'] = $("#id_lei").val();
+			data['sedol'] = $("#id_sedol").val();
+			data['sic_code'] = $("#id_sic_code").val();
+
+			$.ajax({
+				url: url,
+				method: 'POST',
+				data: JSON.stringify(data),
+
+				success: function (data) {
+					stop_loading();
+					const company_info = data.company_info.map(c=>
+						`<tr>
+						<td class="l">${c.company_name}</td>
+						<td class="c">${c.symbol}</td>
+						<td class="c">${c.country}</td>
+						<td class="c">${c.financial_year_end}</td>
+						</tr>`
+						)
+
+					const offering_list = data.offering_list.map(offering=> 
+					`<tr>
+					<td>${offering.offering_type}</td>
+					<td class="l">${offering.offering_announcement_date}</td>
+					<td class="c">${offering.offering_start_date}</td>
+					<td class="c">${offering.offering_end_date}</td>
+					<td class="c">${offering.date_of_listing}</td>
+					<td class="c">${offering.listing_status}</td>
+					<td class="c"><a href="/addcompany-view/${offering.id}"><i class="icofont-eye-alt"></i></a></td>
+					</tr>`
+					)
+
+					document.querySelector('#example2 tbody').innerHTML = company_info
+					document.querySelector('#example3 tbody').innerHTML = offering_list
+
+				},
+				error: function (jqXHR, status, err) {
+					stop_loading();
+					make_warning_alert("warning","Sorry, Something went wrong.");
+				},
+			});
+		}else{
+			stop_loading();
+			make_warning_alert("warning","No field is selected.")
+		}
+	}
+</script>
+
+<script>
+	function resetForm() {
+		//$('#id_company').value = '';
+		//document.getElementById('id_symbol').value='';
+		//document.getElementById('id_cik').value='';
+		//document.getElementById('id_cusip').value='';
+		//document.getElementById('id_isin').value='';
+		//document.getElementById('id_lei').value='';
+		//document.getElementById('id_sedol').value='';
+		//document.getElementById('id_sic_code').value='';
+		window.location.reload();
+	}
+</script>
+
+<!--=============data table===============-->
+
+<script>
+$(document).ready(function() {
+	$('#example2').DataTable({
+	dom: 'Bfrtip',
+	scrollX: true,
+	sScrollXInner: "100%",
+	//scrollY:'30vh',
+	"bFilter": false,
+	scrollCollapse: false,
+	paging: false,
+	lengthMenu: [
+	[ 25, 100, 150, 200 ],
+	[ '25', '100', '150' , '200' ]
+	],
+	});
+	});
+</script>
+
+
+<script>
+	$(document).ready(function() {
+	$('#example3').DataTable({
+	dom: 'Bfrtip',
+	scrollY: '30vh',
+	scrollX: true,
+	sScrollXInner: "100%",
+	"bFilter": false,
+	scrollCollapse: false,
+	paging: false,
+	lengthMenu: [
+	[ 25, 100, 150, 200 ],
+	[ '25', '100', '150' , '200' ]
+	],
+	});
+	});
+</script>
+
+{% endblock %}

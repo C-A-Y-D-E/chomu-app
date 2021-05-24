@@ -1,0 +1,321 @@
+{% extends 'companymaster/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container-fluid" id="headerbx" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+	<div class="container-fluid filtersearch">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="headingbg">
+					<h5><i class="icofont-plus"></i> Add Company</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" id="contentmaindiv">
+	<div class="container-fluid whitepatch">
+		<div class="tp_side">
+			<div class="row">
+				<div class="col-md-6">
+					<h3 class="tb_head"><i class="icofont-info-circle"></i> Financial
+					</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Company</label>
+					<div class="line"></div>
+					{% if companyID %}
+					{{financial.company | attr:"disabled:true"}}
+					{% else %}
+					{{financial.company}}
+					{% endif %}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Offering</label>
+					<div class="line"></div>
+					{% if companyID %}
+					{{financial.offering | attr:"disabled:true"}}
+					{% else %}
+					{{financial.offering }}
+					{% endif %}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Snapshot Date</label>
+					{{financial.date}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Revenue</label>
+					{{financial.revenue}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Net Income</label>
+					{{financial.net_income}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">EBIT</label>
+					{{financial.ebit}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">EBITDA</label>
+					{{financial.ebidta}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Y-O-Y Growth</label>
+					{{financial.y_o_y_growth}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Last 12-Month Sales</label>
+					{{financial.last_12_month_sales}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Last 24-Month Sales</label>
+					{{financial.last_24_month_sales}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Total Assets</label>
+					{{financial.total_assets}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Total Liabilities</label>
+					{{financial.total_liabilities}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Cash</label>
+					{{financial.cash}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Debt</label>
+					{{financial.debt}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Equity</label>
+					{{financial.equity}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View
+							PDF </a></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+
+			{% if companyID %}
+			<a href="/addcompany-4-update/{{companyID}}/{{tid}}" type="button" class="btn btn-warning shw">Back</a>	
+			{% elif offering %}
+			<button type="button" class="btn btn-warning shw" disabled>Back</button>
+			{% else %}
+			<a href="/addcompany-4" type="button" class="btn btn-warning shw">Back</a>
+			{% endif %}
+
+			{% if companyID %}
+			<a type="button" id="submitButton" onclick="submitForm({{tid}})" class="btn btn-success shw">Submit</a>
+			{% else %}
+			<a type="button" id="submitButton" onclick="submitForm()" class="btn btn-success shw">Submit</a>
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+
+
+</div>
+<!----------content-wrap-------------->
+
+<div id="footer">
+	<div class="container-fluid">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 2.4.0
+		</div>Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a>
+		All rights reserved.
+	</div>
+</div>
+
+</div>
+<!----------page-container-------------->
+
+<script>
+	$(function () {
+		$('#id_date').datepicker()
+	})
+
+	function submitForm(tid) {
+		
+		if ($("#id_company").val() && $("#id_offering").val() && $("#id_date").val()){
+			var url = "{% url 'financial_submit_form' %}";
+			var data = {};
+			data['tid'] = tid;
+			data['date'] = $("#id_date").val();
+			data['revenue'] = $("#id_revenue").val();
+			data['net_income'] = $("#id_net_income").val();
+			data['ebit'] = $("#id_ebit").val();
+			data['ebidta'] = $("#id_ebidta").val();
+			data['y_o_y_growth'] = $("#id_y_o_y_growth").val();
+			data['last_12_month_sales'] = $("#id_last_12_month_sales").val();
+			data['last_24_month_sales'] = $("#id_last_24_month_sales").val();
+			data['total_assets'] = $("#id_total_assets").val();
+			data['total_liabilities'] = $("#id_total_liabilities").val();
+			data['cash'] = $("#id_cash").val();
+			data['debt'] = $("#id_debt").val();
+			data['equity'] = $("#id_equity").val();
+			data['offering'] = $("#id_offering").val();
+			data['company'] = $("#id_company").val();
+
+			bootbox.confirm({
+			message: "Confirm Submit?",
+			buttons: {
+				confirm: {
+				label: 'Yes',
+				className: 'btn-success'
+				},
+				cancel: {
+				label: 'No',
+				className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				if(result){
+					start_loading();
+					$.ajax({
+						url: url,
+						method: 'POST',
+						data: JSON.stringify(data),
+						success: function (data) {
+							stop_loading();
+							make_view_alert("success","Financial Details added successfully!");
+						},
+						error: function (jqXHR, status, err) {
+							stop_loading();
+							make_warning_alert("danger","Sorry, Something went wrong.");
+						},
+					});
+				}
+			}
+		});
+		}else{
+			make_warning_alert("warning","Mandatory fields are required.")
+		}
+	}
+</script>
+
+
+<style>
+.required-field::after {
+    content: "*";
+    color: red;
+}
+</style>
+
+
+{% endblock %}

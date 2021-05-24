@@ -1,0 +1,1585 @@
+
+{% extends 'companymaster/base.html' %}
+{% load static %}
+
+{% block content %}
+				
+				
+	<div class="container-fluid" id="headerbx" style="background-image:url(asset/bg.jpg);">
+	<div class="container-fluid filtersearch">
+
+	<div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	<div class="headingbg"><h5><i class="icofont-ebook"></i> Summary Report</h5></div>
+	</div>
+
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="div fl_rg fc" style="width:200px;">
+		<div class="form-group">
+		<label>Source Name</label>
+		<div class="line"></div>
+		<select class="dtfc selectpicker floating-select whe" multiple data-live-search="true" data-live-search-placeholder="Search">
+		<optgroup label="Select">
+		<option>Option</option>
+		<option>Option</option>
+		<option>Option</option>
+		<option>Option</option>
+		<option>Option</option>
+		<option>Option</option>
+		<option>Option</option>
+		</optgroup>
+		</select>
+		</div>
+		</div>
+	</div>
+
+
+	</div>
+
+
+
+	</div>
+	</div>
+				
+				
+				
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+
+<div class="table-responsive">          
+<table id="example2" class="display" style="width:100%">
+<thead>
+<tr>
+<th>Year</th>
+<th class="c"><img src="{% static 'asset/usa.png' %}" class="flag">USA</th>
+<th class="c"><img src="{% static 'asset/uk.png' %}" class="flag">UK</th>
+<th class="c"><img src="{% static 'asset/ca.png' %}" class="flag">CA</th>
+<th class="c">Total</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for s in summary %}
+<tr>
+<td><a href="summary_1.html">{{s.year}}</a></td>
+<td class="c">{{s.USA}}</td>
+<td class="c">{{s.UK}}</td>
+<td class="c">{{s.CN}}</td>
+<td class="c">{{s.total}}</td>
+</tr>
+{% endfor %}
+
+<tr>
+<td><a href="summary_1.html">2021</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2020</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2019</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2018</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2017</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2016</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">30</td>
+</tr>
+<!----------------------------------------------->
+
+<tr>
+<td><a href="summary_1.html">2015</a></td>
+<td class="c">10</td>
+<td class="c">10</td>
+<td class="c">20</td>
+<td class="c">40</td>
+</tr>
+<!----------------------------------------------->
+
+
+
+
+
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+
+	<div class="container-fluid tbpanel" id="headerbxa" style="background-image:url(asset/bg.jpg);">
+	<div class="container-fluid">
+	<div class="row">
+	<div class="col-lg-12">
+	<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#tab1"><img src="{% static 'asset/usa.png' %}" class="flag"> USA</a></li>
+	<li><a data-toggle="tab" href="#tab2"><img src="{% static 'asset/ca.png' %}" class="flag"> CA</a></li>
+	<li><a data-toggle="tab" href="#tab3"><img src="{% static 'asset/uk.png' %}" class="flag"> UK</a></li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+
+
+<div class="container-fluid sq_panel" id="contentmaindiv">
+<div class="1container-fluid">
+<div class="tab-content">	
+			
+<div id="tab1" class="tab-pane fade in active">
+	<ul class="nav nav-tabs sq_nt">
+		<li class="active"><a data-toggle="tab" href="#one">Upcoming / Open Offerings</a>
+		</li>
+		<li><a data-toggle="tab" href="#two">Recently Priced Offers</a>
+		</li>
+		<li><a data-toggle="tab" href="#three">Top Performer</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="one" class="tab-pane fade in active">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Type</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Offer Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for c in company_filter.USA%}
+								<tr>
+										<td><a href="amol">{{c.cname}}</a>
+										</td>
+										<td class="c">{{c.type}}</td>
+										<td class="l">{{c.offer_min}}</td>
+										<td class="l">{{c.offer_max}}</td>
+									</tr>
+								{% endfor %}
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab one end-------->
+		<div id="two" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Namess</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Listing Dt.</th>
+										<th class="c" colspan="2">Lis. Open & Close</th>
+										<th class="c">Listing Gain</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab two end-------->
+		<div id="three" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Symbol</th>
+										<th class="c">Rating</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab three end-------->
+	</div>
+</div><!-----------Tab 1 End---------------------->
+
+<div id="tab2" class="tab-pane fade">
+	<ul class="nav nav-tabs sq_nt">
+		<li class="active"><a data-toggle="tab" href="#one1">Upcoming / Open Offerings</a>
+		</li>
+		<li><a data-toggle="tab" href="#two1">Recently Priced Offers</a>
+		</li>
+		<li><a data-toggle="tab" href="#three1">Top Performer</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="one1" class="tab-pane fade in active">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Type</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Offer Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for c in company_filter.CN%}
+								<tr>
+										<td><a href="amol">{{c.cname}}</a>
+										</td>
+										<td class="c">{{c.type}}</td>
+										<td class="l">{{c.offer_min}}</td>
+										<td class="l">{{c.offer_max}}</td>
+									</tr>
+								{% endfor %}
+									
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab one end-------->
+		<div id="two1" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Listing Dt.</th>
+										<th class="c" colspan="2">Lis. Open & Close</th>
+										<th class="c">Listing Gain</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab two end-------->
+		<div id="three1" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Symbol</th>
+										<th class="c">Rating</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab three end-------->
+	</div>
+</div><!-----------Tab 1 End---------------------->
+
+<div id="tab3" class="tab-pane fade">
+	<ul class="nav nav-tabs sq_nt">
+		<li class="active"><a data-toggle="tab" href="#one2">Upcoming / Open Offerings</a>
+		</li>
+		<li><a data-toggle="tab" href="#two2">Recently Priced Offers</a>
+		</li>
+		<li><a data-toggle="tab" href="#three2">Top Performer</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="one2" class="tab-pane fade in active">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Type</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Offer Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+{% for c in company_filter.UK%}
+								<tr>
+										<td><a href="amol">{{c.cname}}</a>
+										</td>
+										<td class="c">{{c.type}}</td>
+										<td class="l">{{c.offer_min}}</td>
+										<td class="l">{{c.offer_max}}</td>
+									</tr>
+								{% endfor %}
+								
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">IPO</td>
+										<td class="l">10,00,00,000</td>
+										<td class="l">10,00,00,000</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab one end-------->
+		<div id="two2" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="l">Issue Price</th>
+										<th class="l">Listing Dt.</th>
+										<th class="c" colspan="2">Lis. Open & Close</th>
+										<th class="c">Listing Gain</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">Airbnb Inc.</a>
+										</td>
+										<td class="l">37.00</td>
+										<td class="l">08-25-2020</td>
+										<td class="c">40.05</td>
+										<td class="c">48.05</td>
+										<td class="c">20%</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab two end-------->
+		<div id="three2" class="tab-pane fade">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Company Name</th>
+										<th class="c">Symbol</th>
+										<th class="c">Rating</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="amol">ABC Technologies Holdings Inc</a>
+										</td>
+										<td class="c">ADF. U</td>
+										<td class="c">Strong</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="whitepatch">
+						<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Year</th>
+										<th class="c">IPO</th>
+										<th class="c">FPO</th>
+										<th class="c">SPAC</th>
+										<th class="c">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><a href="summary_1.html">2021</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2020</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2019</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2018</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td><a href="summary_1.html">2017</a>
+										</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">10</td>
+										<td class="c">30</td>
+									</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-----tab three end-------->
+	</div>
+</div><!-----------Tab 1 End---------------------->
+
+</div>
+</div>
+</div>	
+	
+
+
+
+
+	<div class="container-fluid tbpanel" id="headerbxa" style="background-image:url(asset/bg.jpg);">
+	<div class="container-fluid">
+	<div class="row">
+	<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 fc">
+	<div class="form-group">
+	<label>From Date</label>
+	<div id="datepicker1" class="input-group date" data-date-format="mm-dd-yyyy">
+	<input class="dtfc form-control" type="text" placeholder="From Date" >
+	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	</div>
+	</div>
+	</div>
+	
+	<div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 fc">
+	<div class="form-group">
+	<label>To Date</label>
+	<div id="datepicker2" class="input-group date" data-date-format="mm-dd-yyyy">
+	<input class="dtfc form-control" type="text" placeholder="To Date" >
+	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+	</div>
+	</div>
+	</div>
+	
+	
+	</div>
+	</div>
+	</div>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="whitepatch">
+					<div class="table-responsive" id="nor_tb">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Date</th>
+										<th>Company Name</th>
+										<th class="l">Date Type</th>
+										<th class="l">Type</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="l">12-12-2020</td>
+										<td><a href="amol">ABC Technologies Holdings Inc</a></td>
+										<td class="l">Listing Date</td>
+										<td class="l">IPO</td>
+										</tr>
+									<!----------------------------------------------->
+									<tr>
+										<td class="l">12-12-2020</td>
+										<td><a href="amol">ABC Technologies Holdings Inc</a></td>
+										<td class="l">Listing Date</td>
+										<td class="l">IPO</td>
+										</tr>
+									<!----------------------------------------------->
+									
+									<tr>
+										<td class="l">12-12-2020</td>
+										<td><a href="amol">ABC Technologies Holdings Inc</a></td>
+										<td class="l">Listing Date</td>
+										<td class="l">IPO</td>
+										</tr>
+									<!----------------------------------------------->
+									
+									<tr>
+										<td class="l">12-12-2020</td>
+										<td><a href="amol">ABC Technologies Holdings Inc</a></td>
+										<td class="l">Listing Date</td>
+										<td class="l">IPO</td>
+										</tr>
+									<!----------------------------------------------->
+									
+									<tr>
+										<td class="l">12-12-2020</td>
+										<td><a href="amol">ABC Technologies Holdings Inc</a></td>
+										<td class="l">Listing Date</td>
+										<td class="l">IPO</td>
+										</tr>
+									<!----------------------------------------------->
+								</tbody>
+							</table>
+						</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6">
+				<div class="whitepatch">
+					<h4 class="newsnm"><i class="icofont-newspaper"></i> Updated News</h4>
+					<div class="mq">
+    <p class="marquee">
+	<span><i class="icofont-newspaper"></i>TATA Group vs Cyrus Mistry: Supreme Court Rules In Favour of Tatas, Sets Aside NCLAT Order <a href="#">View</a></span> <br>
+	
+	<span><i class="icofont-newspaper"></i>TATA Group vs Cyrus Mistry: Supreme Court Rules In Favour of Tatas, Sets Aside NCLAT Order <a href="#">View</a></span> <br>
+	
+	<span><i class="icofont-newspaper"></i>TATA Group vs Cyrus Mistry: Supreme Court Rules In Favour of Tatas, Sets Aside NCLAT Order <a href="#">View</a></span> <br>
+	
+	<span><i class="icofont-newspaper"></i>TATA Group vs Cyrus Mistry: Supreme Court Rules In Favour of Tatas, Sets Aside NCLAT Order <a href="#">View</a></span> <br>
+	
+	
+	</p>
+	
+</div>
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				
+				
+
+
+</div><!-- all other page content start -->
+
+<div id="footer">
+<div class="container-fluid">
+<div class="pull-right hidden-xs">
+<b>Version</b> 2.4.0
+</div>
+Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a> All rights reserved. 
+</div>
+</div>
+
+
+
+
+</div><!-------------Main container start--------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade mymd" id="bodycontent" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Funds People Italian</h4>
+<p><i class="fa fa-calendar" aria-hidden="true"></i> Wed, 09 Dec 2020</p>
+</div>
+<div class="modal-body">
+<p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book. Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+{% endblock %}      
+
+
+
+
+
+
+

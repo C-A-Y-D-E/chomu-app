@@ -1,0 +1,710 @@
+{% extends 'companymaster/base.html' %}
+{% load static %}
+
+{% block content %}
+
+			<div class="container-fluid" id="headerbx" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+			<div class="container-fluid filtersearch">
+			<div class="row">
+			<div class="col-lg-6">
+			<div class="headingbg">
+			<h5><i class="icofont-eye-alt"></i> Data Category</h5>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+
+
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+<div class="tp_side">
+<div class="row">
+<div class="col-md-12">
+<h3 class="tb_head"><i class="icofont-info-circle"></i> Basic Information
+</h3>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<!-----------1--------------->
+<tr>
+<th>Issuer Name</th>
+<td>{{company.company_name}}</td>
+</tr>
+<!-----------2--------------->
+<tr>
+<th>Brief Business Desciption</th>
+<td>{{company.business_description}}</td>
+</tr>
+<!-----------3--------------->
+<tr>
+<th>Symbol</th>
+<td>{{company.symbol}}</td>
+</tr>
+<!-----------3--------------->
+<tr>
+  <th>Website</th>
+  <td>{{CompanyContact_detail.website}}</td>
+  </tr>
+  <!-----------3--------------->
+<tr>
+  <th>Address</th>
+  <td>{{CompanyContact_detail.address}}</td>
+  </tr>
+  <!-----------3--------------->
+<tr>
+  <th>Phone</th>
+  <td>{{CompanyContact_detail.phone}}</td>
+  </tr>
+  <!-----------3--------------->
+<tr>
+  <th>Currency</th>
+  <td>{{CompanyCurrency_detail.currency}}</td>
+  </tr>
+   <!-----------3--------------->
+<tr>
+  <th>Industry</th>
+  <td>{{CompanyIndustry_detail.industry}}</td>
+  </tr>
+   <!-----------3--------------->
+<tr>
+  <th>Country</th>
+  <td>{{CompanyCountry_detail.country}}</td>
+  </tr>
+<!-----------4--------------->
+<tr>
+<th>CIK</th>
+<td>{{company.cik}}</td>
+</tr>
+<!-----------5--------------->
+<tr>
+<th>CUSIP</th>
+<td>{{company.cusip}}</td>
+</tr>
+<!-----------6--------------->
+<tr>
+<th>ISIN</th>
+<td>{{company.isin}}</td>
+</tr>
+<!-----------7--------------->
+<tr>
+<th>MIC Code</th>
+<td>{{company.mic_code}}</td>
+</tr>
+
+</table>
+</div>
+</div>
+<!---------------------------------------------------------------------->
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<!-----------8--------------->
+<tr>
+<th>MIC Seg</th>
+<td>{{company.mic_seg}}</td>
+</tr>
+
+<tr>
+<th>SIC Code</th>
+<td>{{company.sic_code}}</td>
+</tr>
+
+<tr>
+<th>LEI</th>
+<td>{{company.lei}}</td>
+</tr>
+
+<tr>
+<th>Sedol</th>
+<td>{{company.sedol}}</td>
+</tr>
+
+<tr>
+<th>Primary Exchange Code</th>
+<td>{{CompanyExchange_detail.exchange}}</td>
+</tr>
+<!-----------2--------------->
+<tr>
+<th>Country of Inc of Issuer</th>
+<td></td>
+</tr>
+<!-----------3--------------->
+<tr>
+<th>Country of Exchange where Listed</th>
+<td>{{CompanyExchange_detail.exchange_country}}</td>
+</tr>
+
+<!-----------5--------------->
+<tr>
+<th>Number of Employees</th>
+<td>{{company.no_of_employees}}</td>
+</tr>
+<!-----------6--------------->
+<tr>
+<th>Year of Establishment</th>
+<td>{{company.year_of_establishment}}</td>
+</tr>
+<!-----------7--------------->
+<tr>
+<th>Prospectus Link</th>
+<td>{{CompanyOfferingShares_detail.prospectus_link}}</td>
+</tr>
+
+<!-----------4--------------->
+<tr>
+<th>Financial Year-end</th>
+<td>{{company.financial_year_end}}</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+<div class="tp_side">
+<div class="row">
+<div class="col-md-12">
+<h3 class="tb_head"><i class="icofont-info-circle"></i> Key Dates
+</h3>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<!------------1-------------->
+<tr>
+<th>IPO Announcement Date</th>
+<td>{{offering_status.offering_announcement_date}}</td>
+</tr>
+<!-----------2--------------->
+<tr>
+<th>IPO Price Announcement Date</th>
+<td>{{offering_status.offering_price_announcement_date}}</td>
+</tr>
+<!-----------3--------------->
+<tr>
+<th>IPO Start Date</th>
+<td>{{offering_status.offering_start_date}}</td>
+</tr>
+<!-----------4--------------->
+<tr>
+<th>IPO End Date</th>
+<td>{{offering_status.offering_end_date}}</td>  
+</tr>
+<!-----------5--------------->
+<tr>
+<th>Share Issue Date</th>
+<td>{{offering_status.share_issue_date}}</td>
+</tr>
+
+<!-----------2--------------->
+<tr>
+<th>Date of Listing</th>
+<td>{{offering_status.date_of_listing}}</td>
+</tr>
+
+</table>
+</div>
+</div>
+<!---------------------------------------------------------------------->
+
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+
+
+<!-----------4--------------->
+<tr>
+<th>Listing Status</th>
+<td>{{offering_status.listing_status}}</td>
+</tr>
+
+
+<!-----------3--------------->
+<tr>
+<th>Offer Status</th>
+<td>{{offering_status.offer_status}}</td>
+</tr>
+<!-----------8--------------->
+<tr>
+<th>IPO Status</th>
+<td>{{offering_status.IPO_status}}</td>
+</tr>
+<!-----------9--------------->
+<tr>
+<th>Type of listing</th>
+<td>{{offering_status.type_of_listing}}</td>
+</tr>
+<!-----------11-------------->
+<tr>
+<th>Use of Proceeds</th>
+<td>{{offering_status.use_of_proceeds}}</td>
+</tr>
+
+
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+<div class="tp_side">
+<div class="row">
+<div class="col-md-12">
+<h3 class="tb_head"><i class="icofont-info-circle"></i> Offer Structure
+</h3>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<tr>
+<th>Offering</th>
+<td>{{Offering_detail.offering}}</td>
+</tr>
+
+<tr>
+<th>Snapshot Date</th>
+<td>{{CompanyOfferingShares_detail.snapshot_date}}</td>
+</tr>
+
+<!-----------1--------------->
+<tr>
+<th>Shares Offered Min</th>
+<td>{{CompanyOfferingShares_detail.shares_offered_min}}</td>
+</tr>
+<tr>
+  <th>Shares Offered Max</th>
+  <td>{{CompanyOfferingShares_detail.shares_offered_max}}</td>
+  </tr>
+<!-----------2--------------->
+<tr>
+<th>Strategic Shares Offered</th>
+<td>{{CompanyOfferingShares_detail.strategic_shares_offered}}</td>
+</tr>
+<!-----------3--------------->
+<tr>
+<th>Additional Shares Offered Above IPO</th>
+<td>{{CompanyOfferingShares_detail.additional_shares_offered_aboveIPO}}</td>
+</tr>
+<!-----------4--------------->
+<tr>
+<th>Offer Amount Min</th>
+<td>{{CompanyOfferingShares_detail.offer_amount_min}}</td>
+</tr>
+
+<tr>
+<th>Offer Amount Max</th>
+<td>{{CompanyOfferingShares_detail.offer_amount_max}}</td>
+</tr>
+<!-----------5--------------->
+<tr>
+<th>Price Range Min</th>
+<td>{{CompanyOfferingShares_detail.price_range_min}}</td>
+</tr>
+
+<tr>
+<th>Price Range Max</th>
+<td>{{CompanyOfferingShares_detail.price_range_max}}</td>
+</tr>
+<!-----------6--------------->
+<tr>
+<th>Underwriting Discount</th>
+<td>{{CompanyOfferingShares_detail.underwriting_discount}}</td>
+</tr>
+</table>
+</div>
+</div>
+<!---------------------------------------------------------------------->
+
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<!-----------7--------------->
+<tr>
+<th>Proceeds after Expense</th>
+<td>{{CompanyOfferingShares_detail.proceeds_after_expense}}</td>
+</tr>
+<tr>
+<th>Shares Outstanding</th>
+<td>{{CompanyOfferingShares_detail.shares_outstanding}}</td>
+</tr>
+<tr>
+<th>Lockup Period</th>
+<td>{{CompanyOfferingShares_detail.lockup_period}}</td>
+</tr>
+<!------------1-------------->
+<tr>
+<th>Lockup Expiration</th>
+<td>{{CompanyOfferingShares_detail.lockup_expiration_date}}</td>
+</tr>
+<!-----------2--------------->
+<tr>
+<th>Quiet Period Expiration</th>
+<td>{{CompanyOfferingShares_detail.quiet_period_expiration_date}}</td>
+</tr>
+<!-----------3--------------->
+<tr>
+<th>Number of Shares Issued</th>
+<td>{{CompanyOfferingShares_detail.number_of_shares_issued}}</td>
+</tr>
+<!-----------4--------------->
+<tr>
+<th>Number of shares out of the Strategic Sale Offer that were issued</th>
+<td>{{CompanyOfferingShares_detail.strategic_sale_offer_that_were_issued}}</td>
+</tr>
+<!-----------5--------------->
+<tr>
+<th>Greenshoe Option Exercise Date</th>
+<td>{{CompanyOfferingShares_detail.greenshoe_option_exercise_date}}</td>
+</tr>
+<!-----------6--------------->
+<tr>
+<th>Number of Greenshoe shares issued</th>
+<td>{{CompanyOfferingShares_detail.number_of_greenshoe_shares_issued}}</td>
+</tr>
+<!-----------7--------------->
+<tr>
+<th>Shares Overalloted</th>
+<td>{{CompanyOfferingShares_detail.shares_overalloted}}</td>
+</tr>
+<!-----------8--------------->
+<tr>
+<th>Shareholder Shares Offered</th>
+<td>{{CompanyOfferingShares_detail.shareholder_shares_offered}}</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+<div class="tp_side">
+<div class="row">
+<div class="col-md-12">
+<h3 class="tb_head"><i class="icofont-info-circle"></i> IPO Expense
+</h3>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+<!-------------------------->
+<tr>
+<th>Snapshot Date</th>
+<td>{{CompanyFinancial_detail.snapshot_date}}</td>
+</tr>
+<tr>
+<th>Security Par Value</th>
+<td>{{CompanyOfferingFeesExpense_detail.security_parvalue}}</td>
+</tr>
+<tr>
+<th>Security Par Value Currency</th>
+<td>{{CompanyOfferingFeesExpense_detail.currency}}</td>
+</tr>
+<tr>
+<th>Security Description</th>
+<td>{{CompanyOfferingFeesExpense_detail.security_description}}</td>
+</tr>
+<tr>
+<th>Warants Issued</th>
+<td>{{CompanyOfferingFeesExpense_detail.warants_issued}}</td>
+</tr>
+<tr>
+<th>Ex Price of Warants</th>
+<td>{{CompanyOfferingFeesExpense_detail.ex_price_of_warants}}</td>
+</tr>
+<tr>
+<th>Type of Equity Instrument</th>
+<td>{{CompanyOfferingFeesExpense_detail.type_of_equity_instrument}}</td>
+</tr>
+
+<!------------1-------------->
+<tr>
+<th>Total Offering Expense</th>
+<td>{{CompanyOfferingFeesExpense_detail.total_offering_expense}}</td>
+</tr>
+<!-----------2--------------->
+<tr>
+<th>Registration Fee</th>
+<td>{{CompanyOfferingFeesExpense_detail.registeration_fee}}</td>
+</tr>
+ <!-- ---------------------------------------- -->
+ <tr>
+  <th>Total Assets</th>
+  <td>{{CompanyFinancial_detail.total_assets}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+ <tr>
+  <th>Total Liabilities</th>
+  <td>{{CompanyFinancial_detail.total_liabilities}}</td>
+  </tr>
+  
+</table>
+</div>
+</div>
+
+
+<!---------------------------------------------------------------------->
+
+<div class="col-md-6">
+<div class="table-responsive">
+<table class="table table-hover">
+ <!-- ---------------------------------------- -->
+ <tr>
+  <th>Debt</th>
+  <td>{{CompanyFinancial_detail.debt}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+ <tr>
+  <th>Equity</th>
+  <td>{{CompanyFinancial_detail.equity}}</td>
+  </tr>
+<!-- ---------------------------------------- -->
+ <tr>
+  <th>Cash</th>
+  <td>{{CompanyFinancial_detail.cash}}</td>
+  </tr>
+ <!-------------------------->
+<tr>
+<th>Legal Fees & Expenses</th>
+<td>{{CompanyOfferingFeesExpense_detail.legal_fees_expenses}}</td>
+</tr>
+<!-- ---------------------------------------- -->
+<tr>
+  <th>Revenue</th>
+  <td>{{CompanyFinancial_detail.revenue}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>Net Income</th>
+  <td>{{CompanyFinancial_detail.net_income}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>Ebit</th>
+  <td>{{CompanyFinancial_detail.ebit}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>Ebitda</th>
+  <td>{{CompanyFinancial_detail.ebitda}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>yoy Growth</th>
+  <td>{{CompanyFinancial_detail.y_o_y_growth}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>Last 12 Months Sales</th>
+  <td>{{CompanyFinancial_detail.last_12_months_sales}}</td>
+  </tr>
+  <!-- ---------------------------------------- -->
+<tr>
+  <th>Last 24 Months Sales</th>
+  <td>{{CompanyFinancial_detail.last_24_months_sales}}</td>
+  </tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container-fluid" id="contentmaindiv">
+  <div class="container-fluid whitepatch">
+  <div class="tp_side">
+  <div class="row">
+  <div class="col-md-12">
+  <h3 class="tb_head"><i class="icofont-info-circle"></i> Fund Party and Management
+  </h3>
+  </div>
+  </div>
+  </div>
+
+  <div class="row">
+
+  <div class="col-md-12">
+  <div class="table-responsive">
+
+  <table class="table table-hover">
+    <tr>
+    <th>Lead Underwriter</th>
+    </tr>
+    {% for lu in fundparty_lead_underwriter %}
+    <tr>
+    <td>{{lu.fundparty}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <!-- ---------------------------------------- -->
+  <table class="table table-hover">
+    <tr>
+    <th>Underwriter</th>
+    </tr>
+    {% for u in fundparty_underwriter %}
+    <tr>
+    <td>{{u.fundparty}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    <!-- ---------------------------------------- -->
+  <table class="table table-hover">
+    <tr>
+    <th>Underwriter Counsel</th>
+    </tr>
+    {% for uc in fundparty_underwriter_councel %}
+    <tr>
+    <td>{{uc.fundparty}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    <!-- ---------------------------------------- -->
+  <table class="table table-hover">
+    <tr>
+    <th>Auditors</th>
+    </tr>
+    {% for a in fundparty_auditor %}
+    <tr>
+    <td>{{a.fundparty}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    <!-- ---------------------------------------- -->
+<table class="table table-hover">
+  <tr>
+  <th>Transfer Agent</th>
+  </tr>
+  {% for t in fundparty_transfer %}
+  <tr>
+  <td>{{t.fundparty}}</td>
+  </tr>
+  {% endfor %}
+</table>
+    <!-- ---------------------------------------- -->
+<table class="table table-hover">
+  <tr>
+  <th>Company Counsel</th>
+  </tr>
+  {% for cc in fundparty_company_councel %}
+  <tr>
+  <td>{{cc.fundparty}}</td>
+  </tr>
+  {% endfor %}
+</table>
+  <!-- ---------------------------------------- -->
+<table class="table table-hover">
+  <tr>
+  <th>Key Share Holder</th>
+  <th>Description</th>
+  </tr>
+  {% for k in keyshareholder %}
+  <tr>
+  <td>{{k.keyshareholders_name}}</td>
+  <td>{{k.description}}</td>
+  </tr>
+  {% endfor %}
+</table>
+ <!-- ---------------------------------------- -->
+<table class="table table-hover">
+  <tr>
+  <th>Representative Name</th>
+  <th>Designation</th>
+  <th>Description</th>
+  </tr>
+  {% for r in company_representative %}
+  <tr>
+  <td>{{r.representative_name}}</td>
+  <td>{{r.designation}}</td>
+  <td>{{r.description}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12">
+	<a href="/addcompany-update/{{company.id}}/{{Offering_detail.id}}" type="button" class="btn btn-primary shw">Update</a>
+	<button type="button" class="btn btn-warning shw" onclick="isReviewUpdate('{{ Offering_detail.id }}',0)">Send for Review</button>
+	<button type="button" class="btn btn-success shw" onclick="isReviewUpdate('{{ Offering_detail.id }}',1)">Reviewed</button>
+	
+</div>
+</div>
+</div>
+
+	
+	</div><!----------content-wrap-------------->
+
+<div id="footer">
+<div class="container-fluid">
+<div class="pull-right hidden-xs">
+<b>Version</b> 2.4.0</div>Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a> All rights reserved.</div>
+</div>
+
+</div><!----------page-container-------------->
+
+
+<script>
+	function isReviewUpdate(company_offering_id,review_flag){
+    start_loading();
+		data = {'company_offering_id':company_offering_id,'review_flag':review_flag}
+    if(review_flag == 0){
+      alert_msg = 'Record sent for Review.'
+    }
+    else{
+      alert_msg = 'Record reviewed !'
+    }
+		$.ajax({
+			url: '{% url "review" %}',
+			method: 'POST',
+			data: JSON.stringify(data),
+			success: function (data) {
+        stop_loading();
+        if(data.status == 'success'){
+          make_quality_view_alert("success",alert_msg);
+        }
+        else{
+          make_warning_alert("danger","Something went wrong.")
+        }
+			},
+			error: function (jqXHR, status, err) {
+        stop_loading();
+				make_warning_alert("danger","Sorry, Something went wrong.");
+			},
+		});
+	}
+</script>
+
+
+{% endblock %}

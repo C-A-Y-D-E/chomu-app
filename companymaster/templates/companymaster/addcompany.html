@@ -1,0 +1,475 @@
+{% extends 'companymaster/base.html' %}
+{% load static %}
+{% csrf_token %}
+{% load widget_tweaks %}
+{% block content %}
+
+<div class="container-fluid" id="headerbx" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+	<div class="container-fluid filtersearch">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="headingbg">
+					<h5><i class="icofont-plus"></i> Add Company</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" id="contentmaindiv">
+	<div class="container-fluid whitepatch">
+		<div class="tp_side">
+			<div class="row">
+				<div class="col-md-6">
+					<h3 class="tb_head"><i class="icofont-info-circle"></i> Company Info</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<!--<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">ID</label>
+					<input class="dtfc form-control" type="text" placeholder="123" / disabled>
+				</div>
+			</div>-->
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Issuer Name</label>
+					{% if companyID %}
+					{{form.issuer_names | attr:"readonly:true"}}
+					{% else %}
+					{{form.issuer_names}}
+					{% endif %}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">No. of Employee</label>
+
+					{{form.no_of_employees}}
+					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Currency</label>
+					<div class="line"></div>
+					{{form.currency}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Establishment</label>
+					{{form.establishment}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Country</label>
+					<div class="line"></div>
+					{{form.country}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label>Industry</label>
+					<div class="line"></div>
+					{{form.industry}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Business Description</label>
+					{{form.business_description}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Address</label>
+					{{form.address}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Website</label>
+					{{form.website}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Contact No.</label>
+					{{form.contact_no}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Exchange</label>
+					{{form.exchange}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label>Country Exchange</label>
+					<div class="line"></div>
+					{{form.country_exchange}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Financial Year End</label>
+					{{form.financial}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+
+
+<div class="container-fluid" id="contentmaindiv">
+	<div class="container-fluid whitepatch">
+		<div class="tp_side">
+			<div class="row">
+				<div class="col-md-6">
+					<h3 class="tb_head"><i class="icofont-info-circle"></i> Identifier</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr" class='required-field'>Symbol</label>
+					{{form.symbol}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">CIK</label>
+					{{form.CIK}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">CUSIP</label>
+					{{form.CUSIP}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">ISIN</label>
+					{{form.ISIN}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf'}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">LEI</label>
+					{{form.LEI}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">SEDOL</label>
+					{{form.SEDOL}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">MIC Code</label>
+					{{form.MIC_Code}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">MIC Seg</label>
+					{{form.MIC_Seg}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">SIC Code</label>
+					{{form.SIC_Code}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			{% if companyID %}
+			<button onclick="Update()" type="button" class="btn btn-success shw">Update</button>
+			<a href="/addcompany-2-update/{{companyID}}/{{tid}}" type="button" class="btn btn-primary shw">Next</a>	
+			{% else %}
+			<button onclick="submitForm()" type="button" class="btn btn-success shw">Submit</button>
+			<a href="{% url 'addcompany-2' %}" type="button" class="btn btn-primary shw">Next</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+
+
+</div>
+<!----------content-wrap-------------->
+
+<div id="footer">
+	<div class="container-fluid">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 2.4.0
+		</div>Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a>
+		All rights reserved.
+	</div>
+</div>
+
+</div>
+<!----------page-container-------------->
+<script>
+$(function(){
+	let selects = Array.from(document.querySelectorAll('.floating-select'))
+	selects.forEach(select=>{
+		
+		select.addEventListener('change',function(){
+			let value = select.options[select.selectedIndex].text
+			if(value ==='other'){
+				let id = select.getAttribute('id')
+				let h = document.createElement('input')
+				h.setAttribute('class','dtfc form-control')
+				h.setAttribute('type','text')
+				h.setAttribute('id',id)
+			
+				select.parentNode.replaceWith(h)
+			}
+		})
+	})
+})
+</script>
+
+<script>
+	function submitForm() {
+		
+		if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){
+			var url = "{% url 'company_submit_form' %}";
+			var data = {};
+			data['issuer_names'] = $("#id_issuer_names").val();
+			data['no_of_employees'] = $("#id_no_of_employees").val();
+			data['currency'] = $("#id_currency").val();
+			data['establishment'] = $("#id_establishment").val();
+			data['country'] = $("#id_country").val();
+			data['industry'] = $("#id_industry").val();
+			data['business_description'] = $("#id_business_description").val();
+			data['address'] = $("#id_address").val();
+			data['website'] = $("#id_website").val();
+			data['contact_no'] = $("#id_contact_no").val();
+			data['exchange'] = $("#id_exchange").val();
+			data['country_exchange'] = $("#id_country_exchange").val();
+			data['financial'] = $("#id_financial").val();
+			data['symbol'] = $("#id_symbol").val();
+			data['CIK'] = $("#id_CIK").val();
+			data['ISIN'] = $("#id_ISIN").val();
+			data['CUSIP'] = $("#id_CUSIP").val();
+			data['LEI'] = $("#id_LEI").val();
+			data['SEDOL'] = $("#id_SEDOL").val();
+			data['MIC_Seg'] = $("#id_MIC_Seg").val();
+			data['SIC_Code'] = $("#id_SIC_Code").val();
+			data['MIC_Code'] = $("#id_MIC_Code").val();
+
+			bootbox.confirm({
+			message: "Confirm Submit?",
+			buttons: {
+				confirm: {
+				label: 'Yes',
+				className: 'btn-success'
+				},
+				cancel: {
+				label: 'No',
+				className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				if(result){
+					start_loading();
+					$.ajax({
+					url: url,
+					method: 'POST',
+					data: JSON.stringify(data),
+					
+					success: function (data) {
+						stop_loading();
+						if(data.status==='already exists'){
+							make_alert("warning","Company already exists!!")
+						}
+						else{
+							make_alert("success","Company added successfully !");
+						}
+					},
+					error: function (jqXHR, status, err) {
+						stop_loading();
+						make_warning_alert("danger","Sorry, Something went wrong.");
+					},
+					});
+				}
+			}
+			});
+		}else{
+			make_warning_alert("warning","Mandatory fields are required.")
+		}
+	}
+
+	function Update() {
+		
+		if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){
+			var url = "{% url 'addcompany_update' %}";
+			var data = {};
+			data['issuer_names'] = $("#id_issuer_names").val();
+			data['no_of_employees'] = $("#id_no_of_employees").val();
+			data['currency'] = $("#id_currency").val();
+			data['establishment'] = $("#id_establishment").val();
+			data['country'] = $("#id_country").val();
+			data['industry'] = $("#id_industry").val();
+			data['business_description'] = $("#id_business_description").val();
+			data['address'] = $("#id_address").val();
+			data['website'] = $("#id_website").val();
+			data['contact_no'] = $("#id_contact_no").val();
+			data['exchange'] = $("#id_exchange").val();
+			data['country_exchange'] = $("#id_country_exchange").val();
+			data['financial'] = $("#id_financial").val();
+			data['symbol'] = $("#id_symbol").val();
+			data['CIK'] = $("#id_CIK").val();
+			data['ISIN'] = $("#id_ISIN").val();
+			data['CUSIP'] = $("#id_CUSIP").val();
+			data['LEI'] = $("#id_LEI").val();
+			data['SEDOL'] = $("#id_SEDOL").val();
+			data['MIC_Seg'] = $("#id_MIC_Seg").val();
+			data['SIC_Code'] = $("#id_SIC_Code").val();
+			data['MIC_Code'] = $("#id_MIC_Code").val();
+
+			bootbox.confirm({
+			message: "Confirm Submit?",
+			buttons: {
+				confirm: {
+				label: 'Yes',
+				className: 'btn-success'
+				},
+				cancel: {
+				label: 'No',
+				className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				if(result){
+				start_loading();
+				$.ajax({
+					url: url,
+					method: 'POST',
+					data: JSON.stringify(data),
+					
+					success: function (data) {
+						stop_loading();
+						console.log(data)
+						if(data.status==='success'){
+							make_alert("success","Company information updated successfully !");	
+						}
+						else{
+							make_warning_alert("danger","Something went wrong.");
+						}
+					},
+					error: function (jqXHR, status, err) {
+						stop_loading();
+						make_warning_alert("danger","Sorry, Something went wrong.");
+					},
+				});
+			}
+			}
+			});
+		}else{
+			make_warning_alert("warning","Mandatory fields are required.")
+		}
+	}
+</script>
+
+<style>
+.required-field::after {
+    content: "*";
+    color: red;
+}
+</style>
+{% endblock %}
+

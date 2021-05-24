@@ -1,0 +1,267 @@
+{% extends 'companymaster/base.html' %}
+{% load static %}
+{% csrf_token %}
+{% block content %}				
+				
+	<div class="container-fluid" id="headerbx" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+	<div class="container-fluid filtersearch">
+
+	<div class="row">
+	<div class="col-lg-6">
+	<div class="headingbg"><h5><i class="icofont-ebook"></i> Summary Report</h5></div>
+	</div>
+	
+	</div>
+
+	</div>
+	</div>
+				
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid clr_bx">
+
+<div class="row">
+	<div class="col-md-3 col-sm-6 col-xs-6">
+		<div class="in_mid c_3">
+			<h6>Total Count</h6>
+			<h3>{{total_count}}</h3>
+		</div>
+	</div>
+
+	<div class="col-md-3 col-sm-6 col-xs-6">
+		<div class="in_mid c_1">
+			<h6>Recently Added</h6>
+			<h3></h3>
+		</div>
+	</div>
+	
+	<div class="col-md-3 col-sm-6 col-xs-6">
+		<div class="in_mid c_2">
+			<h6>Reviewed</h6>
+			<h3>{{reviewed_count}}</h3>
+		</div>
+	</div>
+	
+	<div class="col-md-3 col-sm-6 col-xs-6">
+		<div class="in_mid c_4">
+			<h6>Quality Check Pending</h6>
+			<h3>{{unreviewed_count}}</h3>
+		</div>
+	</div>
+</div>
+
+</div>
+</div>
+
+	<div class="container-fluid tbpanel" id="headerbxa" style="background-image:url('{% static 'asset/bg.jpg' %}');">
+	<div class="container-fluid">
+	<div class="row">
+	<div class="col-lg-12">
+	<ul class="nav nav-tabs">
+	<li class="active"><a data-toggle="tab" href="#tab1">Need to be Reviewed</a></li>
+	<!--<li><a data-toggle="tab" href="#tab2">Under Review</a></li>-->
+	<li><a data-toggle="tab" href="#tab3">Reviewed</a></li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+<div class="container-fluid" id="contentmaindiv">
+<div class="container-fluid whitepatch">
+
+<div class="fcc" style="width:200px;">	
+<div class="form-group">
+<div class="line"></div>
+
+{% csrf_token %}
+<form method="POST" id='select-submit'>
+<select class="dtfc selectpicker floating-select whe" data-live-search="false" name="country">
+{% for c in country %}
+    <option value="{{c.id}}"
+   {% if selected_country == c.id  %}
+	selected="selected"
+   {% endif %}
+>{{ c.country_name }}</option>
+{% endfor %}
+</select>
+</form>
+
+</div>
+</div>
+<br>
+<div class="tab-content">
+
+	<div id="tab1" class="tab-pane fade in active">
+	<!--<div class="table-responsive">     -->
+	<div class="table-responsive" id="nor_tb">          
+	<table class="table table-hover" class="display" style="width:100%" id="table1">
+	<thead>
+	<tr>
+		<th class="l">Company Name</th>
+		<th class="c">Company Symbol</th>
+		<th class="c">Offering Type</th>
+		<th class="c"></th>
+	</tr>
+	</thead>
+
+	<tbody>
+	{% for c in filtered_companies %}
+		<tr>
+			<td class="l">{{c.company.company_name}}</td>
+			<td class="c">{{c.company.symbol}}</td>
+			<td class="c">{{c.offering.offering_type}}</td>
+			<td class="c"><a href="/addcompany-view/{{c.id}}"><i class="icofont-eye-alt"></i></a></td>
+		</tr>
+	{% endfor %}		
+	</tbody>
+	</table>
+	</div>
+	</div>
+	
+	<!--<div id="tab2" class="tab-pane fade">
+	<div class="table-responsive">          
+	<div class="table-responsive" id="nor_tb">          
+	<table class="table table-hover" class="display" style="width:100%">
+	<thead>
+	<tr>
+	<th>ID</th>
+	<th class="l">Company Name</th>
+	<th class="c">Symbol</th>
+	<th class="c">Country</th>
+	<th class="c">Reviwer</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	<tr>
+	<td>201</td>
+	<td class="l">Ortho Clinical Diagnostics Holdings</td>
+	<td class="c">OCDH</td>
+	<td class="c">USA</td>
+	<td class="c">Gaurav</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	</div>
+	</div>-->
+
+	<div id="tab3" class="tab-pane fade">
+	<div class="table-responsive">          
+	<div class="table-responsive" id="nor_tb">          
+	<table class="table table-hover" class="display" style="width:100%" id="table2">
+	<thead>
+	<tr>
+		<th class="l">Company Name</th>
+		<th class="c">Company Symbol</th>
+		<th class="c">Offering Type</th>
+		<th class="c"></th>
+	</tr>
+	</thead>
+
+	<tbody>
+	{% for r in reviewed_filtered_companies %}
+		<tr>
+			<td class="l">{{r.company.company_name}}</td>
+			<td class="c">{{r.company.symbol}}</td>
+			<td class="c">{{r.offering.offering_type}}</td>
+			<td class="c"><a href="/addcompany-view/{{r.id}}"><i class="icofont-eye-alt"></i></a></td>
+		</tr>
+	{% endfor %}		
+	</tbody>
+	</table>
+	</div>
+	</div>
+	</div>
+
+</div>
+</div>	
+</div>	
+
+
+<div class="tab-content">	
+</div>	
+
+</div>
+
+<!-- all other page content start -->
+
+<div id="footer">
+<div class="container-fluid">
+<div class="pull-right hidden-xs">
+<b>Version</b> 2.4.0
+</div>
+Copyright © 2018-2019 <a href="https://www.decimalpointanalytics.com/" target="_blank">Decimal Point.</a> All rights reserved. 
+</div>
+</div>
+</div>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+	//keep current tab active
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+		localStorage.setItem('activeTab', $(e.target).attr('href'));
+	});
+
+	var activeTab = localStorage.getItem('activeTab');
+	if(activeTab){
+		$('.nav-tabs a[href="' + activeTab + '"]').tab('show');
+	}
+</script>
+
+<script>	
+	const form = 
+	// checking for change event in select
+	document.querySelector('.selectpicker').addEventListener('change',function(){
+	start_loading();
+	// on every select submit form
+	document.querySelector('#select-submit').submit()
+	stop_loading();
+	})
+</script>
+
+
+<script>
+	//datatable for table 1
+	$('a[data-toggle="tab"]').ready(function(){
+	var table = $('#table1').DataTable({
+			dom: 'Blfrtip',
+			paging: true,
+			lengthMenu: [
+			[ 25, 100, 150, 200 ],
+			[ '25', '100', '150' , '200' ]
+			],
+			language: {
+			searchPlaceholder: "Search",
+			search : '<i class="fa fa-search" aria-hidden="true"></i>'
+			}
+		}); 
+	});
+</script>
+
+
+<script>
+	//datatable for table 2
+	$('a[data-toggle="tab"]').ready(function(){
+	var table = $('#table2').DataTable({
+			dom: 'Blfrtip',
+			paging: true,
+			lengthMenu: [
+			[ 25, 100, 150, 200 ],
+			[ '25', '100', '150' , '200' ]
+			],
+			language: {
+			searchPlaceholder: "Search",
+			search : '<i class="fa fa-search" aria-hidden="true"></i>'
+			}
+		}); 
+	});
+</script>
+
+{% endblock %}
+
