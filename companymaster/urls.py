@@ -13,7 +13,9 @@ urlpatterns = [
          views.addcompany_updateView, name='addcompany_update_view'),
     path('addcompany-update', views.addcompany_update, name='addcompany_update'),
 
+
     path('addcompany-2/', views.addcompany_2, name='addcompany-2'),
+    path('addcompany-2-update', views.addcompany2_update, name='addcompany2update'),
     path('addcompany-2-update/<int:company_id>',
          views.addcompany_2_updateView, name='addcompany_update_view_2'),
     path('addcompany-2-extrafield/<int:company_id>',

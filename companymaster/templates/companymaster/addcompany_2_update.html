@@ -172,7 +172,7 @@
 					<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc" id='ceo'>
 				<div class="form-group">
 					<label for="usr">CEO</label>
 					{{form2.ceo}}
@@ -187,7 +187,7 @@
 					<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc" id='cfo'>
 				<div class="form-group">
 					<label for="usr">CFO</label>
 					{{form2.cfo}}
@@ -202,7 +202,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc" id='nominee'>
 				<div class="form-group">
 					<label for="usr">Director Nominee</label>
 					{{form2.director_nominee}}
@@ -215,7 +215,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc" id='key-share'>
 				<div class="form-group">
 					<label for="usr">Key Share Holder</label>
 					{{form2.key_share_holder}}
@@ -240,7 +240,7 @@
 		<div class="col-md-12">
 			<!--<a href="/company-search" type="button" class="btn btn-success shw">Update</a>-->
 			<a href="/addcompany" type="button" class="btn btn-warning shw">Back</a>
-			<a type="button" onclick="submitForm()" class="btn btn-success shw">Submit</a>
+			<a type="button" onclick="submitForm()" class="btn btn-success shw">Update</a>
 			<a href="/addcompany-3" type="button" class="btn btn-primary shw">Next</a>			
 		</div>
 	</div>
@@ -262,6 +262,57 @@
 
 </div>
 <!----------page-container-------------->
+<script>
+
+const createNode = (el,data)=>{
+		item = el.cloneNode(true);
+		data.slice(1).map(director=>{
+		item.querySelector('input').value = director.representative_name ?? director.keyshareholders_name
+		item.querySelector('textarea').value = director.description
+		item.querySelector('.sc').classList.add('delete')
+		item.querySelector('.sc a').innerText= 'Delete'
+		const deleteBtn = item.querySelector('.delete')
+		deleteBtn.classList.remove('sc')
+		insertAfter(item,el)
+
+	})
+}
+$.get('{% url "addcompany_2_extraField" company_id=companyID %}', function( {directors,chairmens,nominees,keyshare,ceo,cfo} ) {
+  	
+	console.log(directors)
+	const dir = document.getElementById('director');
+	createNode(dir,directors)
+  
+	const chair = document.getElementById('charimen');
+	createNode(chair,chairmens)
+	
+	const normi = document.getElementById('nominee');
+	createNode(normi,nominees)
+	
+	const ceo_el = document.getElementById('ceo');
+	createNode(ceo_el,ceo)
+	
+	const cfo_el = document.getElementById('cfo');
+	createNode(cfo_el,cfo)
+	
+	const key = document.getElementById('key-share');
+	createNode(key,keyshare)
+	
+	
+	const deleteBtns = document.querySelectorAll('.delete')
+	deleteBtns.forEach(deleteBtn=>{
+		deleteBtn.addEventListener('click',function(){
+				// removing element container when click on delete field
+				deleteBtn.parentNode.parentNode.remove(true)
+			})
+	})
+
+	
+  
+
+ 
+});
+</script>
 
 <script>
 	// javascript only have a method to add element before it, so this function add element after it.
@@ -303,7 +354,7 @@
 
 	function submitForm() {
 		if($("#id_company").val()){
-			var url = "{% url 'fundparty_submit_form' %}";
+			var url = "{% url 'addcompany2update' %}";
 			var data = {};
 			data['company'] = $("#id_company").val();
 			data['lead_underwriter'] = $("#id_lead_underwriter").val();
@@ -383,36 +434,5 @@
 	}
 </script>
 
-<script>
-$.get('{% url "addcompany_2_extraField" company_id=companyID %}', function( {directors,chairmens} ) {
-  	const dir = document.getElementById('director');
- 
-	directors.slice(1).map(director=>{
-		item = dir.cloneNode(true);
-		item.querySelector('input').value = director.representative_name
-		item.querySelector('textarea').value = director.description
-		insertAfter(item,dir)
 
-	})
-  
-  
-	
-
-	const chair = document.getElementById('charimen');
-	chairmens.slice(1).map(chairmen=>{
-		item = chair.cloneNode(true);
-		item.querySelector('input').value = chairmen.representative_name
-		item.querySelector('textarea').value = chairmen.description
-		insertAfter(item,dir)
-	})
-	
-	
-	
-
-	
-  
-
- 
-});
-</script>
 {% endblock %}

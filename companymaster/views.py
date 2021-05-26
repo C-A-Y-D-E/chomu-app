@@ -515,8 +515,126 @@ def addcompany_2_extraField(request, company_id):
     company_chairmen = CompanyRepresentative.objects.filter(
         company=company_id, designation='Chair. of B. Direc').values('representative_name', 'description')
     company_director = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Chair. of B. Direc').values('representative_name', 'description')
-    return JsonResponse({'keyshare': list(company_share_holder), 'nominee': list(company_nominee), 'ceo': list(company_ceo), 'cfo': list(company_cfo), 'chairmens': list(company_chairmen), 'directors': list(company_director)})
+        company=company_id, designation='Director').values('representative_name', 'description')
+    return JsonResponse({'keyshare': list(company_share_holder), 'nominees': list(company_nominee), 'ceo': list(company_ceo), 'cfo': list(company_cfo), 'chairmens': list(company_chairmen), 'directors': list(company_director)})
+
+
+@csrf_exempt
+def addcompany2_update(request):
+    """
+    This function updates the selected company information.
+    Paramters:
+        request: HTTP request
+    """
+    post_data = json.loads(request.body)
+    post_data = {k: None if not v else v for k, v in post_data.items()}
+    # get post data from request
+    company_id = post_data['company'][0]
+    lead_underwriter = post_data['lead_underwriter']
+    underwriter = post_data['underwriter']
+    u_counsel = post_data['u_counsel']
+    auditors = post_data['auditors']
+    transfer_agent = post_data['transfer_agent']
+    comp_counsel = post_data['comp_counsel']
+    key_share_holder = post_data['key_share_holder']
+    key_share_holder_description = post_data['key_share_holder_description']
+    director_nominee = post_data['director_nominee']
+    director_nominee_description = post_data['director_nominee_description']
+    ceo = post_data['ceo']
+    ceo_description = post_data['ceo_description']
+    cfo = post_data['cfo']
+    cfo_description = post_data['cfo_description']
+    chair_dir = post_data['chair_dir']
+    chair_dir_description = post_data['chair_dir_description']
+    directors = post_data['directors']
+    directors_description = post_data['directors_description']
+    print(lead_underwriter)
+    FundpartyLeadUnderwiter.objects.filter(company_id=int(company_id)).delete()
+    FundPartyUnderwriter.objects.filter(company_id=int(company_id)).delete()
+    FundpartyUnderwiterCouncel.objects.filter(
+        company_id=int(company_id)).delete()
+    FundpartyAuditor.objects.filter(company_id=int(company_id)).delete()
+    FundpartyTransferAgent.objects.filter(company_id=int(company_id)).delete()
+    FundpartyCompanyCouncel.objects.filter(company_id=int(company_id)).delete()
+    CompanyKeyshareholder.objects.filter(company_id=int(company_id)).delete()
+    CompanyRepresentative.objects.filter(company_id=int(company_id)).delete()
+
+    print(CompanyRepresentative.objects.filter(company_id=int(company_id)))
+    print('----------------------------')
+    print(directors)
+    for lead in lead_underwriter:
+        if lead not in (None, ''):
+            lead_r = FundpartyLeadUnderwiter(company_id=int(
+                company_id), fundparty_id=int(lead), updated_by_id=request.user.id)
+            lead_r.save()
+
+    for writer in underwriter:
+        if writer not in (None, ''):
+            w = FundPartyUnderwriter(company_id=int(company_id), fundparty_id=int(
+                writer), updated_by_id=request.user.id)
+            w.save()
+
+    for councel in u_counsel:
+        if councel not in (None, ''):
+            uc = FundpartyUnderwiterCouncel(company_id=int(
+                company_id), fundparty_id=int(councel), updated_by_id=request.user.id)
+            uc.save()
+
+    for auditor in auditors:
+        if auditor not in (None, ''):
+            a = FundpartyAuditor(company_id=int(company_id), fundparty_id=int(
+                auditor), updated_by_id=request.user.id)
+            a.save()
+
+    for agent in transfer_agent:
+        if agent not in (None, ''):
+            ta = FundpartyTransferAgent(company_id=int(
+                company_id), fundparty_id=int(agent), updated_by_id=request.user.id)
+            ta.save()
+
+    for comp in comp_counsel:
+        if comp not in (None, ''):
+            cc = FundpartyCompanyCouncel(company_id=int(
+                company_id), fundparty_id=int(comp), updated_by_id=request.user.id)
+            cc.save()
+
+    for key, desp in zip(key_share_holder, key_share_holder_description):
+        if key not in (None, ''):
+            ks = CompanyKeyshareholder(company_id=int(
+                company_id), keyshareholders_name=key, description=desp, updated_by_id=request.user.id)
+            ks.save()
+
+    for nominee, desp in zip(director_nominee, director_nominee_description):
+        if nominee not in (None, ''):
+            n = CompanyRepresentative(company_id=int(company_id), representative_name=nominee,
+                                      description=desp, designation='Director Nominee', updated_by_id=request.user.id)
+            n.save()
+
+    for ceo_name, desp in zip(ceo, ceo_description):
+        if ceo_name not in (None, ''):
+            c = CompanyRepresentative(company_id=int(company_id), representative_name=ceo_name,
+                                      description=desp, designation='CEO', updated_by_id=request.user.id)
+            c.save()
+
+    for cfo_name, desp in zip(cfo, cfo_description):
+        if cfo_name not in (None, ''):
+            cf = CompanyRepresentative(company_id=int(company_id), representative_name=cfo_name,
+                                       description=desp, designation='CFO', updated_by_id=request.user.id)
+            cf.save()
+
+    for m, desp in zip(chair_dir, chair_dir_description):
+        if m not in (None, ''):
+            cd = CompanyRepresentative(company_id=int(company_id), representative_name=m,
+                                       description=desp, designation='Chair. of B. Direc', updated_by_id=request.user.id)
+            cd.save()
+
+    for director, desp in zip(directors, directors_description):
+        if director not in (None, ''):
+            d = CompanyRepresentative(company_id=int(company_id), representative_name=director,
+                                      description=desp, designation='Director', updated_by_id=request.user.id)
+            d.save()
+
+    return JsonResponse({'name': request.user.username, 'company_id': company_id, 'status': 'success'})
 
 
 def addcompany_2_updateView(request, company_id):
@@ -539,7 +657,7 @@ def addcompany_2_updateView(request, company_id):
     company_chairmen = CompanyRepresentative.objects.filter(
         company=company_id, designation='Chair. of B. Direc').first()
     company_director = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Chair. of B. Direc').first()
+        company=company_id, designation='Director').first()
 
     initialData = {
         'company': company_id,
