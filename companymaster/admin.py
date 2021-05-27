@@ -1,7 +1,8 @@
-#this is admin.py for companymaster (master tables)
+# this is admin.py for companymaster (master tables)
 from django.contrib import admin
-from companymaster.models import Filing,Company,Currency,Exchange,Country,Industry,Fundparty,CompanyOfferings,OfferStatus,IPOStatus,ListingStatus,ListingType
+from companymaster.models import PDFModel, CompanyPDF, Filing, Company, Currency, Exchange, Country, Industry, Fundparty, CompanyOfferings, OfferStatus, IPOStatus, ListingStatus, ListingType
 from import_export.admin import ImportExportModelAdmin
+
 
 class ImportExport(ImportExportModelAdmin, admin.ModelAdmin):
     pass
@@ -19,3 +20,5 @@ admin.site.register(OfferStatus, ImportExport)
 admin.site.register(IPOStatus, ImportExport)
 admin.site.register(ListingStatus, ImportExport)
 admin.site.register(ListingType, ImportExport)
+admin.site.register(PDFModel, ImportExport)
+admin.site.register(CompanyPDF, ImportExport)

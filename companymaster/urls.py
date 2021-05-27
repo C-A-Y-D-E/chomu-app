@@ -1,6 +1,8 @@
 # this is urls.py for all pages
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
@@ -58,4 +60,4 @@ urlpatterns = [
          name='offering_shares_submit_form'),
     path('financial-submit-form/', views.financial_submit_form,
          name='financial_submit_form'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

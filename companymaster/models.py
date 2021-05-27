@@ -1,4 +1,4 @@
-#this is models.py for companymaster (master tables)
+# this is models.py for companymaster (master tables)
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -48,8 +48,10 @@ class Company(models.Model):
     sic_code = models.CharField(max_length=255, null=True, blank=True)
     no_of_employees = models.IntegerField(null=True, blank=True)
     year_of_establishment = models.IntegerField(null=True, blank=True)
-    financial_year_end = models.CharField(max_length=255, null=True, blank=True)
-    business_description = models.CharField(max_length=1000, null=True, blank=True)
+    financial_year_end = models.CharField(
+        max_length=255, null=True, blank=True)
+    business_description = models.CharField(
+        max_length=1000, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -198,7 +200,7 @@ class Fundparty(models.Model):
 
 
 class CompanyOfferings(models.Model):
-    offering_type = models.CharField(max_length=255, null=False)    
+    offering_type = models.CharField(max_length=255, null=False)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -220,8 +222,9 @@ class CompanyOfferings(models.Model):
         verbose_name = "CompanyOfferings"
         verbose_name_plural = "CompanyOfferings"
 
+
 class OfferStatus(models.Model):
-    offer_status = models.CharField(max_length=255, null=False)    
+    offer_status = models.CharField(max_length=255, null=False)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -243,8 +246,9 @@ class OfferStatus(models.Model):
         verbose_name = "OfferStatus"
         verbose_name_plural = "OfferStatus"
 
+
 class IPOStatus(models.Model):
-    ipo_status = models.CharField(max_length=255, null=False)    
+    ipo_status = models.CharField(max_length=255, null=False)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -266,8 +270,9 @@ class IPOStatus(models.Model):
         verbose_name = "IPOStatus"
         verbose_name_plural = "IPOStatus"
 
+
 class ListingStatus(models.Model):
-    listing_status = models.CharField(max_length=255, null=False)    
+    listing_status = models.CharField(max_length=255, null=False)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -289,8 +294,9 @@ class ListingStatus(models.Model):
         verbose_name = "ListingStatus"
         verbose_name_plural = "ListingStatus"
 
+
 class ListingType(models.Model):
-    listing_type = models.CharField(max_length=255, null=False)    
+    listing_type = models.CharField(max_length=255, null=False)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -311,3 +317,28 @@ class ListingType(models.Model):
     class Meta:
         verbose_name = "ListingType"
         verbose_name_plural = "ListingType"
+
+
+class PDFModel(models.Model):
+    filename = models.CharField(max_length=255, null=False)
+    path = models.CharField(max_length=255, null=False)
+
+    def __str__(self):
+        return f'{self.filename}'
+
+    class Meta:
+        verbose_name = "PDFModel"
+        verbose_name_plural = "PDFModel"
+
+
+class CompanyPDF(models.Model):
+    company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFModel, on_delete=models.PROTECT)
+    page_no = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.page_no}'
+
+    class Meta:
+        verbose_name = "CompanyPDF"
+        verbose_name_plural = "CompanyPDF"

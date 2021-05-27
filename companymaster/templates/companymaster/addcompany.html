@@ -166,6 +166,21 @@
 							View PDF </a></div>
 				</div>
 			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">PDF</label>
+					{{form.pdf}}
+					
+					<div class="fr"><a href="" target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Page No</label>
+					{{form.page_no}}
+				</div>
+			</div>
 
 
 		</div>
@@ -463,6 +478,16 @@ $(function(){
 			make_warning_alert("warning","Mandatory fields are required.")
 		}
 	}
+</script>
+
+<script>
+const pageNo = document.getElementById('id_page_no')
+document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `/${document.getElementById('id_pdf').value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+document.getElementById('id_pdf').addEventListener('change',function(e){
+	
+	const parent = e.target.parentElement.parentElement;
+	parent.querySelector('.fr a').href = `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+})
 </script>
 
 <style>
