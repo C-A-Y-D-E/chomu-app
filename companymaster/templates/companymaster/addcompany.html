@@ -481,7 +481,13 @@ $(function(){
 </script>
 
 <script>
-const pageNo = document.getElementById('id_page_no')
+let pageNo;
+let el = document.getElementById('id_page_no')
+el.addEventListener('input',function(e){
+	
+	document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `/${document.getElementById('id_pdf').value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+})
+pageNo = document.getElementById('id_page_no')
 document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `/${document.getElementById('id_pdf').value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
 document.getElementById('id_pdf').addEventListener('change',function(e){
 	
