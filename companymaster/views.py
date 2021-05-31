@@ -10,11 +10,41 @@ import datetime
 from django.http import JsonResponse, HttpResponseRedirect
 from companymaster.form import CompanyInfoForm, FundPartyForm, OfferingDetail, OffershareDetail, FinancialDetail, CompanySearch
 from companytransaction.models import CompanyExchange, CompanyOfferingStatus, CompanyCountry, CompanyOfferings, IndustryCompany, CompanyOfferingShares, CompanyFinancial, CompanyOfferingFeesExpense, Offering, CompanyRepresentative, CompanyKeyshareholder, FundPartyUnderwriter, CompanyCurrency, CompanyContact, CompanyFiling, FundpartyCompanyCouncel, FundpartyTransferAgent, FundpartyAuditor, FundpartyUnderwiterCouncel, CompanyRepresentative, FundpartyLeadUnderwiter, CompanyIndustry
+from companymaster.models import PDFModel
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q, Sum, F, Count
 from sqlalchemy import create_engine
 import pandas as pd
 import numpy as np
+from django.core.files.storage import FileSystemStorage
+
+import random
+# ADDING PDF
+
+
+@csrf_exempt
+def addPDF(request):
+    """
+    This method is used for adding a new fund party in database.
+    Parameters:
+        request: http POST request
+    """
+    if request.POST.get('action') == 'add-pdf':
+        filename = request.POST.get('filename')
+        file = request.FILES.get('file')
+        fs = FileSystemStorage(location='companymaster/static/asset/pdf')
+        saved_file = fs.save(filename+'-'+str(request.user.id)+'.pdf', file)
+        fileurl = fs.url(saved_file)
+
+        pdf = PDFModel(path='static/asset/pdf/'+fileurl, filename=filename)
+        pdf.save()
+
+    else:
+        post_data = json.loads(request.body)
+
+        pdf = PDFModel(path=post_data['uri'], filename=post_data['filename'])
+        pdf.save()
+    return render(request, 'companymaster/addcompany.html')
 
 
 def home(request):

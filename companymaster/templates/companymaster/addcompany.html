@@ -15,7 +15,67 @@
 		</div>
 	</div>
 </div>
+<!-- MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Add</h4>
+		  <button type="button" class="close" data-dismiss="modal">
+			<i class="icofont-close-circled"></i>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div class="form-group">
+					<label>File Name</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='filename' id='filename' />
+			</div>
+		  <div class="form-group">
+					<label>Add PDF LINK</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='uri' id='pdf_uri' />
+			</div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDFLink()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
+  
+<div class="modal fade" id="pdf-upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Add</h4>
+		  <button type="button" class="close" data-dismiss="modal">
+			<i class="icofont-close-circled"></i>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div class="form-group">
+					<label>File Name</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
+			</div>
+		  <div class="form-group">
+					<label>Add PDF File</label>
+					<div class="line"></div>
+					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
+			</div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDFFile()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+<!-- MODAL END -->
 <div class="container-fluid" id="contentmaindiv">
 	<div class="container-fluid whitepatch">
 		<div class="tp_side">
@@ -171,8 +231,17 @@
 					<label for="usr">PDF</label>
 					{{form.pdf}}
 					
-					<div class="fr"><a href="" target="_new" ><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<button data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF LINK 
+						</button>
+						<button data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+							 Upload 
+						</button> 
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
@@ -485,15 +554,73 @@ let pageNo;
 let el = document.getElementById('id_page_no')
 el.addEventListener('input',function(e){
 	
-	document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `/${document.getElementById('id_pdf').value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+	document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `${document.getElementById('id_pdf').value.startsWith('http') ? '' : '/'}${document.getElementById('id_pdf').value}#page=${e.target.value === '' ? 1 : e.target.value}`;
 })
 pageNo = document.getElementById('id_page_no')
-document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `/${document.getElementById('id_pdf').value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `${document.getElementById('id_pdf').value.startsWith('http') ? '' : '/'}${document.getElementById('id_pdf').value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
 document.getElementById('id_pdf').addEventListener('change',function(e){
 	
 	const parent = e.target.parentElement.parentElement;
-	parent.querySelector('.fr a').href = `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+	
+	parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+
 })
+
+</script>
+
+<script>
+function addPDFLink(){
+	 start_loading();
+		uri = $('#pdf_uri').val()
+		filename = $('#filename').val()
+		data = {uri,filename}
+		console.log(data)
+		 $.ajax({
+			url: '{% url "addpdf" %}',
+			method: 'POST',
+			data: JSON.stringify(data),
+			success: function (data) {
+				stop_loading();
+				make_alert("success","PDF uploaded successfully !");
+			},
+			error: function (jqXHR, status, err) {
+				stop_loading();
+				make_warning_alert("danger","Sorry, Something went wrong.");
+			},
+		}); 
+		
+}
+function addPDFFile(){
+	 start_loading();
+		file = $('#pdf_file')[0].files[0]
+		
+		console.log(file)
+		filename = $('#uploadfilename').val()
+		var form = new FormData();
+		form.append('filename',filename);
+		form.append('file',file)
+		 form.append('action', 'add-pdf')
+        form.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+		   $.ajax({ 
+			url: '{% url "addpdf" %}',
+			method: 'POST',
+			cache: false,
+              processData: false,
+              contentType: false,
+              enctype: 'multipart/form-data',
+			data: form,
+			success: function (data) {
+				stop_loading();
+				make_alert("success","PDF uploaded successfully !");
+			},
+			error: function (jqXHR, status, err) {
+				stop_loading();
+				make_warning_alert("danger","Sorry, Something went wrong.");
+			},
+		});  
+		
+}
 </script>
 
 <style>

@@ -54,10 +54,10 @@ class CompanyInfoForm(ModelForm):
         attrs={'class': 'dtfc form-control'}))
     SIC_Code = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
-    # pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all().values_list(
-    #     'path', 'filename'), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
-    pdf = forms.ChoiceField(choices=(PDFModel.objects.all().values_list(
-        'path', 'filename')), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
+    pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+    # pdf = forms.ChoiceField(choices=(PDFModel.objects.all().values_list(
+    #     'path', 'filename')), , widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
     page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control'}))
 
