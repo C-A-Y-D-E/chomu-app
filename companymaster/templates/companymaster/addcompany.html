@@ -689,18 +689,14 @@ pageNo.addEventListener('input',function(e){
 el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsWith('http') ? '' : '/'}${el.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
 
 
-
-
 // Check whether select field changed or not
 el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsWith('http') ? '' : '/'}${el.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
-el.addEventListener('change',function(e){
-const parent = e.target.parentElement.parentElement;
-parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
-
 
 })  
 
-
+el.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
 
 
 })
