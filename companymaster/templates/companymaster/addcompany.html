@@ -26,20 +26,26 @@
 		  </button>
 		</div>
 		<div class="modal-body">
-		  <div class="form-group">
+		   <div class="form-group">
 					<label>File Name</label>
 					<div class="line"></div>
-					<input type='text' class='dtfc form-control' name='filename' id='filename' />
+					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
 			</div>
-		  <div class="form-group">
+			<div class="form-group">
 					<label>Add PDF LINK</label>
 					<div class="line"></div>
 					<input type='text' class='dtfc form-control' name='uri' id='pdf_uri' />
 			</div>
+		  <div class="form-group">
+					<label>Add PDF File</label>
+					<div class="line"></div>
+					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
+			</div>
+		  
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary" onclick="addPDFLink()">Save changes</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDF()">Save changes</button>
 		</div>
 	  </div>
 	</div>
@@ -107,6 +113,36 @@
 							View PDF </a></div>
 				</div>
 			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Issuer Name PDF</label>
+					{% if companyID %}
+					{{form.issuer_names_pdf | attr:"readonly:true"}}
+					{% else %}
+					{{form.issuer_names_pdf}}
+					{% endif %}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Issuer Name Page No</label>
+					{% if companyID %}
+					{{form.issuer_names_page_no | attr:"readonly:true"}}
+					{% else %}
+					{{form.issuer_names_page_no}}
+					{% endif %}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -150,6 +186,30 @@
 							View PDF </a></div>
 				</div>
 			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Country PDF</label>
+					<div class="line"></div>
+					{{form.country_pdf}}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label class='required-field'>Country Page No</label>
+					<div class="line"></div>
+					{{form.country_page_no}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -170,11 +230,55 @@
 							View PDF </a></div>
 				</div>
 			</div>
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Business Description PDF</label>
+					{{form.business_pdf}}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Business Description Page No</label>
+					{{form.business_page_no}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label for="usr">Address</label>
 					{{form.address}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Address PDF</label>
+					{{form.address_pdf}}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Address Page No</label>
+					{{form.address_page_no}}
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
@@ -206,6 +310,28 @@
 							View PDF </a></div>
 				</div>
 			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Exchange PDF</label>
+					{{form.exchange_pdf}}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr">Exchange Page No</label>
+					{{form.exchange_page_no}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+				</div>
+			</div>
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -226,30 +352,8 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
-				<div class="form-group">
-					<label for="usr">PDF</label>
-					{{form.pdf}}
-					
-					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-							View PDF 
-						</a>
-						<button data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
-							Add PDF LINK 
-						</button>
-						<button data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-							 Upload 
-						</button> 
-					</div>
-				</div>
-			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
-				<div class="form-group">
-					<label for="usr">Page No</label>
-					{{form.page_no}}
-				</div>
-			</div>
+			
+			
 
 
 		</div>
@@ -272,6 +376,30 @@
 				<div class="form-group">
 					<label for="usr" class='required-field'>Symbol</label>
 					{{form.symbol}}
+					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr" class='required-field'>Symbol PDF</label>
+					{{form.symbol_pdf}}
+					<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+							View PDF 
+						</a>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+							Add PDF
+						</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+				<div class="form-group">
+					<label for="usr" class='required-field'>Symbol Page No</label>
+					{{form.symbol_page_no}}
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 
@@ -550,26 +678,97 @@ $(function(){
 </script>
 
 <script>
-let pageNo;
-let el = document.getElementById('id_page_no')
-el.addEventListener('input',function(e){
-	
-	document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `${document.getElementById('id_pdf').value.startsWith('http') ? '' : '/'}${document.getElementById('id_pdf').value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+
+let pdfFilesEl = Array.from(document.querySelectorAll('.pdf-file'))
+let pageNumbersEl = Array.from(document.querySelectorAll('.page-no'))
+pdfFilesEl.forEach((el,index)=>{
+
+// Input Event to detecte typing and set value accordingly.
+let pageNo = pageNumbersEl[index]
+pageNo.addEventListener('input',function(e){
+el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsWith('http') ? '' : '/'}${el.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+
+
+
+
+// Check whether select field changed or not
+el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsWith('http') ? '' : '/'}${el.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+el.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+
+
+})  
+
+
+
+
 })
-pageNo = document.getElementById('id_page_no')
-document.getElementById('id_pdf').parentElement.parentElement.querySelector('.fr a').href = `${document.getElementById('id_pdf').value.startsWith('http') ? '' : '/'}${document.getElementById('id_pdf').value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
-document.getElementById('id_pdf').addEventListener('change',function(e){
-	
-	const parent = e.target.parentElement.parentElement;
-	
-	parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+
+
+
+
+
+
+
+
+
+
 
 })
 
 </script>
+{% comment %} <script>
+let pageNo = document.getElementById('id_country_page_no')
+let pdf = document.getElementById('id_country_pdf')
+pageNo.addEventListener('input',function(e){
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+})
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+pdf.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+})
+</script>
+<script>
+let pageNo = document.getElementById('id_business_page_no')
+let pdf = document.getElementById('id_business_pdf')
+pageNo.addEventListener('input',function(e){
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+})
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+pdf.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+})
+</script>
+<script>
+let pageNo = document.getElementById('id_address_page_no')
+let pdf = document.getElementById('id_address_pdf')
+pageNo.addEventListener('input',function(e){
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+})
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+pdf.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+})
+</script>
+<script>
+let pageNo = document.getElementById('id_symbol_page_no')
+let pdf = document.getElementById('id_symbol_pdf')
+pageNo.addEventListener('input',function(e){
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
+})
+pdf.parentElement.parentElement.querySelector('.fr a').href = `${pdf.value.startsWith('http') ? '' : '/'}${pdf.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+pdf.addEventListener('change',function(e){
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+})
+</script> {% endcomment %}
 
 <script>
-function addPDFLink(){
+{% comment %} function addPDF(){
 	 start_loading();
 		uri = $('#pdf_uri').val()
 		filename = $('#filename').val()
@@ -589,16 +788,17 @@ function addPDFLink(){
 			},
 		}); 
 		
-}
-function addPDFFile(){
+} {% endcomment %}
+function addPDF(){
 	 start_loading();
 		file = $('#pdf_file')[0].files[0]
+		uri = $('#pdf_uri').val()
 		
-		console.log(file)
 		filename = $('#uploadfilename').val()
 		var form = new FormData();
 		form.append('filename',filename);
 		form.append('file',file)
+		form.append('uri',uri)
 		 form.append('action', 'add-pdf')
         form.append('csrfmiddlewaretoken', '{{ csrf_token }}')
 

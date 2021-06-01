@@ -37,6 +37,7 @@ class Filing(models.Model):
 
 class Company(models.Model):
     company_name = models.CharField(max_length=255, null=False)
+
     symbol = models.CharField(max_length=255, null=False)
     cik = models.CharField(max_length=255, null=True, blank=True)
     cusip = models.CharField(max_length=255, null=True, blank=True)
@@ -322,8 +323,6 @@ class ListingType(models.Model):
 class PDFModel(models.Model):
     filename = models.CharField(max_length=255, null=False)
     path = models.CharField(max_length=255, null=False)
-
-   
 
     def __str__(self):
         return f'{self.filename}'

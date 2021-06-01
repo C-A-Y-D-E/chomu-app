@@ -12,6 +12,10 @@ import datetime
 class CompanyInfoForm(ModelForm):
     issuer_names = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
+    issuer_names_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    issuer_names_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     no_of_employees = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'dtfc form-control'}))
     currency = forms.ModelChoiceField(queryset=Currency.objects.all(
@@ -20,12 +24,24 @@ class CompanyInfoForm(ModelForm):
         widget=forms.NumberInput(attrs={'class': 'dtfc form-control'}))
     country = forms.ModelChoiceField(queryset=Country.objects.all(
     ), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
+    country_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    country_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     industry = forms.ModelChoiceField(queryset=Industry.objects.all(
     ), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
     business_description = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'dtfc form-control'}))
+    business_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    business_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     address = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
+    address_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    address_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     financial = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
     website = forms.CharField(widget=forms.TextInput(
@@ -34,10 +50,18 @@ class CompanyInfoForm(ModelForm):
         attrs={'class': 'dtfc form-control'}))
     exchange = forms.ModelChoiceField(queryset=Exchange.objects.all(
     ), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
+    exchange_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    exchange_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     country_exchange = forms.ModelChoiceField(queryset=Country.objects.all(
     ), widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
     symbol = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
+    symbol_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+    symbol_page_no = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'dtfc form-control page-no'}))
     CIK = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
     ISIN = forms.CharField(widget=forms.TextInput(
@@ -56,8 +80,6 @@ class CompanyInfoForm(ModelForm):
         attrs={'class': 'dtfc form-control'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
         attrs={'class': 'dtfc selectpicker floating-select whe'}))
-    # pdf = forms.ChoiceField(choices=(PDFModel.objects.all().values_list(
-    #     'path', 'filename')), , widget=forms.Select(attrs={'class': 'dtfc selectpicker floating-select whe'}))
     page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control'}))
 

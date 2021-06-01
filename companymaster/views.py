@@ -31,18 +31,20 @@ def addPDF(request):
     """
     if request.POST.get('action') == 'add-pdf':
         filename = request.POST.get('filename')
+        uri = request.POST.get('uri')
         file = request.FILES.get('file')
-        fs = FileSystemStorage(location='companymaster/static/asset/pdf')
-        saved_file = fs.save(filename+'-'+str(request.user.id)+'.pdf', file)
-        fileurl = fs.url(saved_file)
+        print(uri)
+        print('-------------------')
+        print(file)
+        if file:
+            fs = FileSystemStorage(location='companymaster/static/asset/pdf')
+            saved_file = fs.save(
+                filename+'-'+str(request.user.id)+'.pdf', file)
+            fileurl = fs.url(saved_file)
+            pdf = PDFModel(path='static/asset/pdf/'+fileurl, filename=filename)
+        else:
+            pdf = PDFModel(path=uri, filename=filename)
 
-        pdf = PDFModel(path='static/asset/pdf/'+fileurl, filename=filename)
-        pdf.save()
-
-    else:
-        post_data = json.loads(request.body)
-
-        pdf = PDFModel(path=post_data['uri'], filename=post_data['filename'])
         pdf.save()
     return render(request, 'companymaster/addcompany.html')
 
