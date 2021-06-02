@@ -5,6 +5,30 @@ from datetime import datetime
 from django.utils import timezone
 
 
+class PDFModel(models.Model):
+    filename = models.CharField(max_length=255, null=False)
+    path = models.CharField(max_length=255, null=False)
+
+    def __str__(self):
+        return f'{self.filename}'
+
+    class Meta:
+        verbose_name = "PDFModel"
+        verbose_name_plural = "PDFModel"
+
+
+class PDFPage(models.Model):
+    pdf = models.ForeignKey(PDFModel, on_delete=models.PROTECT)
+    page_no = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.page_no}'
+
+    class Meta:
+        verbose_name = "PDFPage"
+        verbose_name_plural = "PDFPage"
+
+
 class Filing(models.Model):
     original_link = models.CharField(
         max_length=255, verbose_name="Original Link")
@@ -37,8 +61,17 @@ class Filing(models.Model):
 
 class Company(models.Model):
     company_name = models.CharField(max_length=255, null=False)
-
+    company_name_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="company_name_pdf")
     symbol = models.CharField(max_length=255, null=False)
+    symbol_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="symbol_pdf")
+    exchange_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="exchange_pdf")
+    country_pdf = business_description_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="country_pdf")
+    address_pdf = business_description_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="address_pdf")
     cik = models.CharField(max_length=255, null=True, blank=True)
     cusip = models.CharField(max_length=255, null=True, blank=True)
     isin = models.CharField(max_length=255, null=True, blank=True)
@@ -53,6 +86,8 @@ class Company(models.Model):
         max_length=255, null=True, blank=True)
     business_description = models.CharField(
         max_length=1000, null=True, blank=True)
+    business_description_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name="business_description_pdf")
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -318,28 +353,3 @@ class ListingType(models.Model):
     class Meta:
         verbose_name = "ListingType"
         verbose_name_plural = "ListingType"
-
-
-class PDFModel(models.Model):
-    filename = models.CharField(max_length=255, null=False)
-    path = models.CharField(max_length=255, null=False)
-
-    def __str__(self):
-        return f'{self.filename}'
-
-    class Meta:
-        verbose_name = "PDFModel"
-        verbose_name_plural = "PDFModel"
-
-
-class CompanyPDF(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
-    pdf = models.ForeignKey(PDFModel, on_delete=models.PROTECT)
-    page_no = models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.page_no}'
-
-    class Meta:
-        verbose_name = "CompanyPDF"
-        verbose_name_plural = "CompanyPDF"

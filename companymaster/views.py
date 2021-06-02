@@ -3,14 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views, login, authenticate
-from companymaster.models import Filing, Company, Exchange, Fundparty, Currency, Country
+from companymaster.models import Filing, Company, Exchange, Fundparty, Currency, Country, PDFPage, PDFModel
 from django.contrib.auth.decorators import login_required
 import json
 import datetime
 from django.http import JsonResponse, HttpResponseRedirect
 from companymaster.form import CompanyInfoForm, FundPartyForm, OfferingDetail, OffershareDetail, FinancialDetail, CompanySearch
 from companytransaction.models import CompanyExchange, CompanyOfferingStatus, CompanyCountry, CompanyOfferings, IndustryCompany, CompanyOfferingShares, CompanyFinancial, CompanyOfferingFeesExpense, Offering, CompanyRepresentative, CompanyKeyshareholder, FundPartyUnderwriter, CompanyCurrency, CompanyContact, CompanyFiling, FundpartyCompanyCouncel, FundpartyTransferAgent, FundpartyAuditor, FundpartyUnderwiterCouncel, CompanyRepresentative, FundpartyLeadUnderwiter, CompanyIndustry
-from companymaster.models import PDFModel
+
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q, Sum, F, Count
 from sqlalchemy import create_engine
@@ -1342,8 +1342,47 @@ def company_submit_form(request):
         SIC_Code = post_data['SIC_Code']
         MIC_Code = post_data['MIC_Code']
 
-        company_info = Company(no_of_employees=no_of_employees, company_name=issuer_names, sic_code=MIC_Seg, mic_seg=SIC_Code, sedol=SEDOL, lei=LEI, cusip=CUSIP, isin=ISIN, cik=CIK,
-                               symbol=symbol, mic_code=MIC_Code, financial_year_end=financial, business_description=business_description, year_of_establishment=establishment, updated_by_id=request.user.id)
+        # 2-6-21
+        issuer_names_pdf = post_data['issuer_names_pdf']
+        issuer_names_page_no = post_data['issuer_names_page_no']
+        pdf = PDFModel.objects.filter(path=issuer_names_pdf).first()
+        issuer_pdf_page = PDFPage(pdf_id=pdf.id, page_no=issuer_names_page_no)
+        issuer_pdf_page.save()
+
+        country_pdf = post_data['country_pdf']
+        country_page_no = post_data['country_page_no']
+        pdf = PDFModel.objects.filter(path=country_pdf).first()
+        country_pdf_page = PDFPage(pdf_id=pdf.id, page_no=country_page_no)
+        country_pdf_page.save()
+
+        business_pdf = post_data['business_pdf']
+        business_page_no = post_data['business_page_no']
+        pdf = PDFModel.objects.filter(path=business_pdf).first()
+        business_pdf_page = PDFPage(pdf_id=pdf.id, page_no=business_page_no)
+        business_pdf_page.save()
+
+        address_pdf = post_data['address_pdf']
+        address_page_no = post_data['address_page_no']
+        pdf = PDFModel.objects.filter(path=address_pdf).first()
+        address_pdf_page = PDFPage(pdf_id=pdf.id, page_no=address_page_no)
+        address_pdf_page.save()
+
+        exchange_pdf = post_data['exchange_pdf']
+        exchange_page_no = post_data['exchange_page_no']
+        pdf = PDFModel.objects.filter(path=exchange_pdf).first()
+        exchange_pdf_page = PDFPage(pdf_id=pdf.id, page_no=exchange_page_no)
+        exchange_pdf_page.save()
+
+        symbol_pdf = post_data['symbol_pdf']
+        symbol_page_no = post_data['symbol_page_no']
+        pdf = PDFModel.objects.filter(path=symbol_pdf).first()
+        symbol_pdf_page = PDFPage(pdf_id=pdf.id, page_no=symbol_page_no)
+        symbol_pdf_page.save()
+
+        print(pdf.id)
+        print(issuer_names_pdf)
+
+        company_info = Company(no_of_employees=no_of_employees, company_name=issuer_names, sic_code=MIC_Seg, mic_seg=SIC_Code, sedol=SEDOL, lei=LEI, cusip=CUSIP, isin=ISIN, cik=CIK,symbol=symbol, mic_code=MIC_Code, financial_year_end=financial, business_description=business_description, year_of_establishment=establishment, updated_by_id=request.user.id,company_name_pdf_id=issuer_pdf_page.id,symbol_pdf_id=symbol_pdf_page.id,exchange_pdf_id=exchange_pdf_page.id,country_pdf_id=country_pdf_page.id,address_pdf_id=address_pdf_page.id,business_description_pdf_id=business_pdf_page.id)
         company_info.save()
         company_id = company_info.id
         print("company id: ", company_info.id)

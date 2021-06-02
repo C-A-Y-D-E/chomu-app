@@ -1,9 +1,10 @@
 # this is models.py file for companytransactions which consists of transaction tables
 from django.db import models
-from companymaster.models import Filing, Company, Exchange, Fundparty, Country, Industry, CompanyOfferings, Currency, OfferStatus, IPOStatus, ListingStatus, ListingType
+from companymaster.models import PDFPage, Filing, Company, Exchange, Fundparty, Country, Industry, CompanyOfferings, Currency, OfferStatus, IPOStatus, ListingStatus, ListingType
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.utils import timezone
+
 
 class Offering(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
@@ -34,7 +35,9 @@ class Offering(models.Model):
 class CompanyExchange(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     exchange = models.ForeignKey(Exchange, on_delete=models.PROTECT)
-    exchange_country = models.ForeignKey(Country, on_delete=models.PROTECT,null=True)
+    exchange_country = models.ForeignKey(
+        Country, on_delete=models.PROTECT, null=True)
+
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -60,6 +63,7 @@ class CompanyExchange(models.Model):
 class CompanyCountry(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     country = models.ForeignKey(Country, on_delete=models.PROTECT)
+
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -108,7 +112,8 @@ class IndustryCompany(models.Model):
 
 
 class CompanyOfferingShares(models.Model):
-    company_offering = models.ForeignKey(Offering, on_delete=models.PROTECT, null=True)    
+    company_offering = models.ForeignKey(
+        Offering, on_delete=models.PROTECT, null=True)
     shares_offered_min = models.DecimalField(
         max_digits=30, decimal_places=8, null=True, blank=True)
     shares_offered_max = models.DecimalField(
@@ -171,12 +176,17 @@ class CompanyOfferingShares(models.Model):
 
 
 class CompanyOfferingStatus(models.Model):
-    company_offering = models.ForeignKey(Offering, on_delete=models.PROTECT, null=True)    
-    listing_status = models.ForeignKey(ListingStatus, on_delete=models.PROTECT,null=True, blank=True)
+    company_offering = models.ForeignKey(
+        Offering, on_delete=models.PROTECT, null=True)
+    listing_status = models.ForeignKey(
+        ListingStatus, on_delete=models.PROTECT, null=True, blank=True)
     snapshot_date = models.DateField(null=True, blank=True)
-    IPO_status = models.ForeignKey(IPOStatus, on_delete=models.PROTECT,null=True, blank=True)
-    offer_status = models.ForeignKey(OfferStatus, on_delete=models.PROTECT,null=True, blank=True)
-    type_of_listing = models.ForeignKey(ListingType, on_delete=models.PROTECT,null=True, blank=True)
+    IPO_status = models.ForeignKey(
+        IPOStatus, on_delete=models.PROTECT, null=True, blank=True)
+    offer_status = models.ForeignKey(
+        OfferStatus, on_delete=models.PROTECT, null=True, blank=True)
+    type_of_listing = models.ForeignKey(
+        ListingType, on_delete=models.PROTECT, null=True, blank=True)
     offering_announcement_date = models.DateField(null=True, blank=True)
     offering_price_announcement_date = models.DateField(null=True, blank=True)
     offering_start_date = models.DateField(null=True, blank=True)
@@ -210,7 +220,8 @@ class CompanyOfferingStatus(models.Model):
 
 
 class CompanyFinancial(models.Model):
-    company_offering = models.ForeignKey(Offering, on_delete=models.PROTECT, null=True) 
+    company_offering = models.ForeignKey(
+        Offering, on_delete=models.PROTECT, null=True)
     snapshot_date = models.DateField(null=True, blank=True)
     revenue = models.DecimalField(
         max_digits=30, decimal_places=8, null=True, blank=True)
@@ -259,22 +270,33 @@ class CompanyFinancial(models.Model):
 
 
 class CompanyOfferingFeesExpense(models.Model):
-    company_offering = models.ForeignKey(Offering, on_delete=models.PROTECT, null=True)    
+    company_offering = models.ForeignKey(
+        Offering, on_delete=models.PROTECT, null=True)
     snapshot_date = models.DateField(null=True, blank=True)
-    registeration_fee = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    type_of_equity_instrument = models.CharField(max_length=255, null=True, blank=True)
-    security_description = models.CharField(max_length=500, null=True, blank=True)
-    warants_issued = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    ex_price_of_warants = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    total_offering_expense = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    legal_fees_expenses = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    security_parvalue = models.DecimalField(max_digits=30, decimal_places=8, null=True, blank=True)
-    currency = models.ForeignKey(Currency, on_delete=models.PROTECT, null=True, blank=True)
+    registeration_fee = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    type_of_equity_instrument = models.CharField(
+        max_length=255, null=True, blank=True)
+    security_description = models.CharField(
+        max_length=500, null=True, blank=True)
+    warants_issued = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    ex_price_of_warants = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    total_offering_expense = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    legal_fees_expenses = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    security_parvalue = models.DecimalField(
+        max_digits=30, decimal_places=8, null=True, blank=True)
+    currency = models.ForeignKey(
+        Currency, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=True, null=True, blank=True)
     is_deleted = models.BooleanField(default=False, null=True, blank=True)
     created_date = models.DateTimeField(editable=False, null=True, blank=True)
     updated_date = models.DateTimeField(null=True, blank=True, editable=True)
-    updated_by = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Updated By", blank=True, default=1)
+    updated_by = models.ForeignKey(
+        User, on_delete=models.PROTECT, verbose_name="Updated By", blank=True, default=1)
 
     def save(self, *args, **kwargs):
         ''' On save, update timestamps '''
@@ -525,6 +547,7 @@ class CompanyContact(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     website = models.CharField(max_length=255, null=True)
     address = models.CharField(max_length=255, null=True)
+
     phone = models.CharField(max_length=255, null=True)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)

@@ -537,7 +537,7 @@ $(function(){
 <script>
 	function submitForm() {
 		
-		if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){
+		 if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){
 			var url = "{% url 'company_submit_form' %}";
 			var data = {};
 			data['issuer_names'] = $("#id_issuer_names").val();
@@ -562,6 +562,26 @@ $(function(){
 			data['MIC_Seg'] = $("#id_MIC_Seg").val();
 			data['SIC_Code'] = $("#id_SIC_Code").val();
 			data['MIC_Code'] = $("#id_MIC_Code").val();
+
+			// 2-6-21
+
+			data['issuer_names_pdf'] = $('#id_issuer_names_pdf').val();
+			data['issuer_names_page_no'] = $('#id_issuer_names_page_no').val();
+
+			data['country_pdf'] = $('#id_country_pdf').val();
+			data['country_page_no'] = $('#id_country_page_no').val();
+
+			data['business_pdf'] = $('#id_business_pdf').val();
+			data['business_page_no'] = $('#id_business_page_no').val();
+
+			data['address_pdf'] = $('#id_address_pdf').val();
+			data['address_page_no'] = $('#id_address_page_no').val();
+
+			data['exchange_pdf'] = $('#id_exchange_pdf').val();
+			data['exchange_page_no'] = $('#id_exchange_page_no').val();
+
+			data['symbol_pdf'] = $('#id_symbol_pdf').val();
+			data['symbol_page_no'] = $('#id_symbol_page_no').val();
 
 			bootbox.confirm({
 			message: "Confirm Submit?",
@@ -600,9 +620,9 @@ $(function(){
 				}
 			}
 			});
-		}else{
+		 }else{
 			make_warning_alert("warning","Mandatory fields are required.")
-		}
+		} 
 	}
 
 	function Update() {
