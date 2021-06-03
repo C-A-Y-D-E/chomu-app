@@ -62,20 +62,229 @@
 		  </button>
 		</div>
 		<div class="modal-body">
-		  <div class="form-group">
-					<label>File Name</label>
-					<div class="line"></div>
-					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
+			<div class="container-fluid">
+			<!-- Issue Name-->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Issuer Name PDF</label>
+							{% if companyID %}
+							{{form.issuer_names_pdf | attr:"readonly:true"}}
+							{% else %}
+							{{form.issuer_names_pdf}}
+							{% endif %}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Issuer Name Page No</label>
+							{% if companyID %}
+							{{form.issuer_names_page_no | attr:"readonly:true"}}
+							{% else %}
+							{{form.issuer_names_page_no}}
+							{% endif %}
+							<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
+									View PDF </a></div>
+						</div>
+					</div>
+
+				</div>
+			<!-- Country -->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Country PDF</label>
+							<div class="line"></div>
+								{{form.country_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Country PDF</label>
+							<div class="line"></div>
+								{{form.country_page_no}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+
+					</div>
+			
+
+				</div>
+			<!-- business -->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Business PDF</label>
+							<div class="line"></div>
+								{{form.business_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Business Page No</label>
+							<div class="line"></div>
+								{{form.business_page_no}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			<!-- Address -->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Address PDF</label>
+							<div class="line"></div>
+								{{form.address_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Address Page No</label>
+							<div class="line"></div>
+								{{form.address_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			
+			<!-- exchange -->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Exchange PDF</label>
+							<div class="line"></div>
+								{{form.exchange_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Exchange Page No</label>
+							<div class="line"></div>
+								{{form.exchange_page_no}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			
+			<!-- Symbol -->
+				<div class="row">
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Symbol PDF</label>
+							<div class="line"></div>
+								{{form.symbol_pdf}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 ml-auto">
+						<div class="form-group">
+							<label class='required-field'>Symbol Page No</label>
+							<div class="line"></div>
+								{{form.symbol_page_no}}
+							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
+								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
+									View PDF 
+								</a>
+								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
+									Add PDF
+								</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			
+			
 			</div>
-		  <div class="form-group">
-					<label>Add PDF File</label>
-					<div class="line"></div>
-					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
-			</div>
-		</div>
+  		</div>
+		
+
 		<div class="modal-footer">
-		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		  <button type="button" class="btn btn-primary" onclick="addPDFFile()">Save changes</button>
+		  {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> {% endcomment %}
+		  <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
 		</div>
 	  </div>
 	</div>
@@ -88,6 +297,9 @@
 			<div class="row">
 				<div class="col-md-6">
 					<h3 class="tb_head"><i class="icofont-info-circle"></i> Company Info</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-2">
+					<button data-toggle="modal" data-target="#pdf-upload" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></a>
 				</div>
 			</div>
 		</div>
@@ -113,7 +325,7 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label class='required-field'>Issuer Name PDF</label>
 					{% if companyID %}
@@ -130,8 +342,8 @@
 						</a>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			</div> {% endcomment %}
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label class='required-field'>Issuer Name Page No</label>
 					{% if companyID %}
@@ -142,7 +354,7 @@
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -186,7 +398,7 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label class='required-field'>Country PDF</label>
 					<div class="line"></div>
@@ -195,7 +407,7 @@
 						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
 							View PDF 
 						</a>
-						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
 							Add PDF
 						</a>
 					</div>
@@ -209,7 +421,7 @@
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -230,7 +442,7 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-4 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-4 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label for="usr">Business Description PDF</label>
 					{{form.business_pdf}}
@@ -251,7 +463,7 @@
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -261,7 +473,7 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label for="usr">Address PDF</label>
 					{{form.address_pdf}}
@@ -282,7 +494,7 @@
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -310,7 +522,7 @@
 							View PDF </a></div>
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label for="usr">Exchange PDF</label>
 					{{form.exchange_pdf}}
@@ -331,7 +543,7 @@
 					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
 							View PDF </a></div>
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
@@ -381,7 +593,7 @@
 
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
+			{% comment %} <div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label for="usr" class='required-field'>Symbol PDF</label>
 					{{form.symbol_pdf}}
@@ -389,7 +601,7 @@
 						<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
 							View PDF 
 						</a>
-						<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
+						<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
 							Add PDF
 						</a>
 					</div>
@@ -404,7 +616,7 @@
 							View PDF </a></div>
 
 				</div>
-			</div>
+			</div> {% endcomment %}
 
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
