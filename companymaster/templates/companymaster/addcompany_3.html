@@ -15,12 +15,54 @@
 	</div>
 </div>
 
+<!--Modal-->
+<div class="modal fade" id="addpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Add</h4>
+		  <button type="button" class="close" data-dismiss="modal">
+			<i class="icofont-close-circled"></i>
+		  </button>
+		</div>
+		<div class="modal-body">
+		   <div class="form-group">
+					<label>File Name</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
+			</div>
+			<div class="form-group">
+					<label>Add PDF LINK</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='uri' id='pdf_uri' />
+			</div>
+		  <div class="form-group">
+					<label>Add PDF File</label>
+					<div class="line"></div>
+					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
+			</div>
+		  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDF()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
 <div class="container-fluid" id="contentmaindiv">
 	<div class="container-fluid whitepatch">
 		<div class="tp_side">
 			<div class="row">
 				<div class="col-md-6">
 					<h3 class="tb_head"><i class="icofont-info-circle"></i> Offering Details</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-2" style='display:flex;gap:4px;margin-left:auto;'>
+					<button style='margin-left:auto;' data-toggle="modal" data-target="#addpdf" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></button>
+					<div style='width:100px;'>
+					{{offerForm.pdf}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -105,8 +147,10 @@
 				<div class="form-group">
 					<label for="usr">Use of Proceeds</label>
 					{{offerForm.use_of_Proceeds}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.use_of_Proceeds_pdf}}
+						{{offerForm.use_of_Proceeds_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -132,8 +176,10 @@
 				<div class="form-group">
 					<label>IPO Announcement Dt.</label>
 					{{offerForm.ipo_announcement_dt}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.ipo_announcement_dt_pdf}}
+						{{offerForm.ipo_announcement_dt_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -143,7 +189,10 @@
 				<div class="form-group">
 					<label>IPO Pr. Announcement Dt.</label>
 					{{offerForm.ipo_pr_announcement_dt}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.ipo_pr_announcement_dt_pdf}}
+						{{offerForm.ipo_pr_announcement_dt_page_no}}
+					</div>
 				</div>
 			</div>
 	
@@ -152,16 +201,20 @@
 				<div class="form-group">
 					<label>IPO Start Dt.</label>
 					{{offerForm.ipo_start_dt}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.ipo_start_dt_pdf}}
+						{{offerForm.ipo_start_dt_page_no}}
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2 col-sm-3 col-xs-6 fcc">
 				<div class="form-group">
 					<label>IPO End Dt.</label>
 					{{offerForm.ipo_end_dt}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.ipo_end_dt_pdf}}
+						{{offerForm.ipo_end_dt_page_no}}
+					</div>
 				</div>
 			</div>
 	
@@ -170,8 +223,10 @@
 				<div class="form-group">
 					<label>Share Issue Dt.</label>
 					{{offerForm.share_issue_dt}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.share_issue_dt_pdf}}
+						{{offerForm.share_issue_dt_page_no}}
+					</div>
 				</div>
 			</div>
 	
@@ -180,8 +235,10 @@
 				<div class="form-group">
 					<label>Date of Listing</label>
 					{{offerForm.date_of_listing}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.date_of_listing_pdf}}
+						{{offerForm.date_of_listing_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -189,8 +246,10 @@
 				<div class="form-group">
 					<label>Withdrawn Date</label>
 					{{offerForm.withdrawn_date}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.withdrawn_date_pdf}}
+						{{offerForm.withdrawn_date_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -198,8 +257,10 @@
 				<div class="form-group">
 					<label>Postpone Date</label>
 					{{offerForm.postpone_date}}
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i> View PDF
-						</a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{offerForm.postpone_date_pdf}}
+						{{offerForm.postpone_date_page_no}}
+					</div>
 				</div>
 			</div>
 

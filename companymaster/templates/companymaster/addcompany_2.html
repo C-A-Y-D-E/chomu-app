@@ -41,6 +41,43 @@
 	</div>
   </div>
 
+
+  <!--Modal-->
+<div class="modal fade" id="addpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Add</h4>
+		  <button type="button" class="close" data-dismiss="modal">
+			<i class="icofont-close-circled"></i>
+		  </button>
+		</div>
+		<div class="modal-body">
+		   <div class="form-group">
+					<label>File Name</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
+			</div>
+			<div class="form-group">
+					<label>Add PDF LINK</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='uri' id='pdf_uri' />
+			</div>
+		  <div class="form-group">
+					<label>Add PDF File</label>
+					<div class="line"></div>
+					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
+			</div>
+		  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDF()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
 <div class="container-fluid" id="contentmaindiv">
 	<div class="container-fluid whitepatch">
 		<div class="tp_side">
@@ -49,8 +86,13 @@
 					<h3 class="tb_head"><i class="icofont-info-circle"></i> Fund Party Information
 					</h3>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-2">
-					<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add FundParty</span></a>
+		
+				<div class="col-md-6 col-sm-6 col-xs-2" style='display:flex;gap:4px;margin-left:auto;'>
+					<button style='margin-left:auto;' data-toggle="modal" data-target="#addpdf" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></button>
+					<button data-toggle="modal" data-target="#exampleModal" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add FundParty</span></button>
+					<div style='width:100px;'>
+					{{form2.pdf}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -69,8 +111,10 @@
 					<label for="usr">Lead Underwriter</label>
 					{{form2.lead_underwriter}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{form2.lead_underwriter_pdf}}
+						{{form2.lead_underwriter_page_no}}
+					</div>
 					<!--<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>-->
 				</div>
 			</div>
@@ -80,8 +124,10 @@
 					<label for="usr">Underwriter</label>
 					{{form2.underwriter}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+						<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{form2.underwriter_pdf}}
+						{{form2.underwriter_page_no}}
+					</div>
 					<!--<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>-->
 				</div>
 			</div>
@@ -102,8 +148,10 @@
 					<label for="usr">Auditor</label>
 					{{form2.auditors}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf'%}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{form2.auditors_pdf}}
+						{{form2.auditors_page_no}}
+					</div>
 					<!--<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>-->
 				</div>
 			</div>
@@ -176,14 +224,17 @@
 				<div class="form-group">
 					<label for="usr">CEO</label>
 					{{form2.ceo}}
+					
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
 				</div>
 				<div class="form-group">
 					{{form2.ceo_description}}
 					<!-- <textarea class="form-control" rows="3" id="comment"></textarea> -->
 
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{form2.ceo_pdf}}
+						{{form2.ceo_page_no}}
+					</div>
 					<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>
 				</div>
 			</div>
@@ -224,8 +275,10 @@
 				<div class="form-group">
 					{{form2.key_share_holder_description}}
 					<!-- <textarea class="form-control" rows="3" id="comment"></textarea> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{form2.key_share_holder_pdf}}
+						{{form2.key_share_holder_page_no}}
+					</div>
 					<div class="sc"><a href="#"><i class="icofont-plus"></i> Add More</a></div>
 				</div>
 			</div>
