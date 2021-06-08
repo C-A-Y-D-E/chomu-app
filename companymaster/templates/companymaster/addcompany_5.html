@@ -63,6 +63,9 @@
 					<button style='margin-left:auto;' data-toggle="modal" data-target="#addpdf" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></button>
 					<div style='width:100px;'>
 					{{financial.pdf}}
+					<div class="fr" ><a href="{% static 'asset/pdf.pdf' %}" target="_blank"><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+					
 					</div>
 				</div>
 			</div>
@@ -357,7 +360,18 @@
 	}
 </script>
 
+<script>
+let pdfFilesEl = Array.from(document.querySelectorAll('.pdf-file'))
+pdfFilesEl.forEach(el=>{
+el.addEventListener('change',function(e){
+	console.log(e.target.parentElement)
+const parent = e.target.parentElement.parentElement;
+parent.querySelector('.fr a').href = e.target.value
 
+
+})
+})
+</script>
 <style>
 .required-field::after {
     content: "*";

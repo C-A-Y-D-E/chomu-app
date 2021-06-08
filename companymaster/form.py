@@ -79,9 +79,9 @@ class CompanyInfoForm(ModelForm):
     SIC_Code = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
     page_no = forms.IntegerField(widget=forms.NumberInput(
-        attrs={'class': 'dtfc form-control'}))
+        attrs={'class': 'dtfc form-control '}))
 
     class Meta:
         model = Company
@@ -157,7 +157,7 @@ class FundPartyForm(ModelForm):
     key_share_holder_page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control page-no'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
 
     class Meta:
         model = Company
@@ -236,7 +236,7 @@ class OfferingDetail(ModelForm):
     postpone_date_page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control page-no'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
 
     class Meta:
         model = Company
@@ -341,7 +341,7 @@ class OffershareDetail(forms.Form):
     total_offering_exp_page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control page-no'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
 # This is OfferingDetail form page 5
 
 
@@ -401,7 +401,7 @@ class FinancialDetail(forms.Form):
     equity_page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control page-no'}))
     pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
 
 # class Meta:
 #         model = Industry

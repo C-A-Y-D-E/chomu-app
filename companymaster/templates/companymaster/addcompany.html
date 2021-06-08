@@ -299,10 +299,14 @@
 				<div class="col-md-6">
 					<h3 class="tb_head"><i class="icofont-info-circle"></i> Company Info</h3>
 				</div>
-				<div class="col-md-6 col-sm-6 col-xs-2" style='display:flex;gap:4px;margin-left:auto;'>
+				<div class="col-md-6 col-sm-6 col-xs-2" style='display:flex;gap:4px;margin-left:auto;justify-content:start'>
 					<button style='margin-left:auto;' data-toggle="modal" data-target="#addpdf" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></button>
-					<div style='width:100px;'>
+					<div style='width:100px;display:flex;flex-direction:column;'>
 					{{form.pdf}}
+					<div class="fr" ><a href="{% static 'asset/pdf.pdf' %}" target="_blank"><i class="icofont-file-pdf"></i>
+							View PDF </a></div>
+					</div>
+					
 					</div>
 				</div>
 				
@@ -798,12 +802,13 @@ $(function(){
 <script>
 
 let pdfFilesEl = Array.from(document.querySelectorAll('.pdf-file'))
-let pageNumbersEl = Array.from(document.querySelectorAll('.page-no'))
+{% comment %} let pageNumbersEl = Array.from(document.querySelectorAll('.page-no'))
 pdfFilesEl.forEach((el,index)=>{
 
 // Input Event to detecte typing and set value accordingly.
 let pageNo = pageNumbersEl[index]
 pageNo.addEventListener('input',function(e){
+	console.log(e.parentElement)
 el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsWith('http') ? '' : '/'}${el.value}#page=${e.target.value === '' ? 1 : e.target.value}`;
 
 
@@ -812,24 +817,30 @@ el.parentElement.parentElement.querySelector('.fr a').href = `${el.value.startsW
 
 })  
 
+
+
+
+
+
+
+
+
+
+
+
+
+}) {% endcomment %}
+
+pdfFilesEl.forEach(el=>{
 el.addEventListener('change',function(e){
+	console.log(e.target.parentElement)
 const parent = e.target.parentElement.parentElement;
-parent.querySelector('.fr a').href = e.target.value.startsWith('http') ? `${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`  : `/${e.target.value}#page=${pageNo.value === '' ? 1 : pageNo.value}`;
+parent.querySelector('.fr a').href = e.target.value
 
 
 })
-
-
-
-
-
-
-
-
-
-
-
 })
+
 
 </script>
 {% comment %} <script>
