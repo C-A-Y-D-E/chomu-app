@@ -15,6 +15,42 @@
 	</div>
 </div>
 
+<!-- MODAL -->
+<div class="modal fade" id="addpdf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Add</h4>
+		  <button type="button" class="close" data-dismiss="modal">
+			<i class="icofont-close-circled"></i>
+		  </button>
+		</div>
+		<div class="modal-body">
+		   <div class="form-group">
+					<label>File Name</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='filename' id='uploadfilename' />
+			</div>
+			<div class="form-group">
+					<label>Add PDF LINK</label>
+					<div class="line"></div>
+					<input type='text' class='dtfc form-control' name='uri' id='pdf_uri' />
+			</div>
+		  <div class="form-group">
+					<label>Add PDF File</label>
+					<div class="line"></div>
+					<input type='file' accept="application/pdf"  class='dtfc form-control' name='file' id='pdf_file' />
+			</div>
+		  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="addPDF()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
 <div class="container-fluid" id="contentmaindiv">
 	<div class="container-fluid whitepatch">
 		<div class="tp_side">
@@ -22,6 +58,12 @@
 				<div class="col-md-6">
 					<h3 class="tb_head"><i class="icofont-info-circle"></i> Financial
 					</h3>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-2" style='display:flex;gap:4px;margin-left:auto;'>
+					<button style='margin-left:auto;' data-toggle="modal" data-target="#addpdf" type="button" class="btn-sm btn-info btn fl_rg shw" data-original-title="" title=""><i class="icofont-plus"></i> <span>Add PDF</span></button>
+					<div style='width:100px;'>
+					{{financial.pdf}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,9 +113,10 @@
 					<label for="usr">Revenue</label>
 					{{financial.revenue}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.revenue_pdf}}
+						{{financial.revenue_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -128,9 +171,10 @@
 					<label for="usr">Last 12-Month Sales</label>
 					{{financial.last_12_month_sales}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.last_12_month_sales_pdf}}
+						{{financial.last_12_month_sales_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -150,9 +194,10 @@
 					<label for="usr">Total Assets</label>
 					{{financial.total_assets}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.total_assets_pdf}}
+						{{financial.total_assets_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -172,9 +217,10 @@
 					<label for="usr">Cash</label>
 					{{financial.cash}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.cash_pdf}}
+						{{financial.cash_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -183,9 +229,10 @@
 					<label for="usr">Debt</label>
 					{{financial.debt}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.debt_pdf}}
+						{{financial.debt_page_no}}
+					</div>
 				</div>
 			</div>
 
@@ -194,9 +241,10 @@
 					<label for="usr">Equity</label>
 					{{financial.equity}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
-					<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-							View
-							PDF </a></div>
+					<div style='display:flex;gap:2px;margin-top:2px;'>
+						{{financial.equity_pdf}}
+						{{financial.equity_page_no}}
+					</div>
 				</div>
 			</div>
 
