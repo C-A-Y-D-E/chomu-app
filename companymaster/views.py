@@ -41,7 +41,8 @@ def addPDF(request):
             saved_file = fs.save(
                 filename+'-'+str(request.user.id)+'.pdf', file)
             fileurl = fs.url(saved_file)
-            pdf = PDFModel(path='static/asset/pdf/'+fileurl, filename=filename)
+            pdf = PDFModel(path='/static/asset/pdf/' +
+                           fileurl, filename=filename)
         else:
             pdf = PDFModel(path=uri, filename=filename)
 
@@ -1469,8 +1470,7 @@ def fundparty_submit_form(request):
     lead_underwriter_pdf_page.save()
 
     underwriter_pdf = post_data['underwriter_pdf']
-    print(underwriter_pdf)
-    print(lead_underwriter_pdf)
+
     underwriter_page_no = post_data['underwriter_page_no']
     pdf = PDFModel.objects.filter(path=underwriter_pdf).first()
     underwriter_pdf_page = PDFPage(
