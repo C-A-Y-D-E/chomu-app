@@ -1382,7 +1382,8 @@ def company_submit_form(request):
         print(pdf.id)
         print(issuer_names_pdf)
 
-        company_info = Company(no_of_employees=no_of_employees, company_name=issuer_names, sic_code=MIC_Seg, mic_seg=SIC_Code, sedol=SEDOL, lei=LEI, cusip=CUSIP, isin=ISIN, cik=CIK,symbol=symbol, mic_code=MIC_Code, financial_year_end=financial, business_description=business_description, year_of_establishment=establishment, updated_by_id=request.user.id,company_name_pdf_id=issuer_pdf_page.id,symbol_pdf_id=symbol_pdf_page.id,exchange_pdf_id=exchange_pdf_page.id,country_pdf_id=country_pdf_page.id,address_pdf_id=address_pdf_page.id,business_description_pdf_id=business_pdf_page.id)
+        company_info = Company(no_of_employees=no_of_employees, company_name=issuer_names, sic_code=MIC_Seg, mic_seg=SIC_Code, sedol=SEDOL, lei=LEI, cusip=CUSIP, isin=ISIN, cik=CIK, symbol=symbol, mic_code=MIC_Code, financial_year_end=financial, business_description=business_description,
+                               year_of_establishment=establishment, updated_by_id=request.user.id, company_name_pdf_id=issuer_pdf_page.id, symbol_pdf_id=symbol_pdf_page.id, exchange_pdf_id=exchange_pdf_page.id, country_pdf_id=country_pdf_page.id, address_pdf_id=address_pdf_page.id, business_description_pdf_id=business_pdf_page.id)
         company_info.save()
         company_id = company_info.id
         print("company id: ", company_info.id)
@@ -1460,16 +1461,53 @@ def fundparty_submit_form(request):
     directors = post_data['directors']
     directors_description = post_data['directors_description']
 
+    lead_underwriter_pdf = post_data['lead_underwriter_pdf']
+    lead_underwriter_page_no = post_data['lead_underwriter_page_no']
+    pdf = PDFModel.objects.filter(path=lead_underwriter_pdf).first()
+    lead_underwriter_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=lead_underwriter_page_no)
+    lead_underwriter_pdf_page.save()
+
+    underwriter_pdf = post_data['underwriter_pdf']
+    print(underwriter_pdf)
+    print(lead_underwriter_pdf)
+    underwriter_page_no = post_data['underwriter_page_no']
+    pdf = PDFModel.objects.filter(path=underwriter_pdf).first()
+    underwriter_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=underwriter_page_no)
+    underwriter_pdf_page.save()
+
+    auditors_pdf = post_data['auditors_pdf']
+    auditors_page_no = post_data['auditors_page_no']
+    pdf = PDFModel.objects.filter(path=auditors_pdf).first()
+    auditors_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=auditors_page_no)
+    auditors_pdf_page.save()
+
+    ceo_pdf = post_data['ceo_pdf']
+    ceo_page_no = post_data['ceo_page_no']
+    pdf = PDFModel.objects.filter(path=ceo_pdf).first()
+    ceo_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=ceo_page_no)
+    ceo_pdf_page.save()
+
+    key_share_holder_pdf = post_data['key_share_holder_pdf']
+    key_share_holder_page_no = post_data['key_share_holder_page_no']
+    pdf = PDFModel.objects.filter(path=key_share_holder_pdf).first()
+    key_share_holder_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=key_share_holder_page_no)
+    key_share_holder_pdf_page.save()
+
     for lead in lead_underwriter:
         if lead not in (None, ''):
             lead_r = FundpartyLeadUnderwiter(company_id=int(
-                company_id), fundparty_id=int(lead), updated_by_id=request.user.id)
+                company_id), fundparty_id=int(lead), pdf_id=lead_underwriter_pdf_page.id, updated_by_id=request.user.id)
             lead_r.save()
 
     for writer in underwriter:
         if writer not in (None, ''):
             w = FundPartyUnderwriter(company_id=int(company_id), fundparty_id=int(
-                writer), updated_by_id=request.user.id)
+                writer), updated_by_id=request.user.id, pdf_id=underwriter_pdf_page.id)
             w.save()
 
     for councel in u_counsel:
@@ -1481,7 +1519,7 @@ def fundparty_submit_form(request):
     for auditor in auditors:
         if auditor not in (None, ''):
             a = FundpartyAuditor(company_id=int(company_id), fundparty_id=int(
-                auditor), updated_by_id=request.user.id)
+                auditor), updated_by_id=request.user.id, pdf_id=auditors_pdf_page.id)
             a.save()
 
     for agent in transfer_agent:
@@ -1499,7 +1537,7 @@ def fundparty_submit_form(request):
     for key, desp in zip(key_share_holder, key_share_holder_description):
         if key not in (None, ''):
             ks = CompanyKeyshareholder(company_id=int(
-                company_id), keyshareholders_name=key, description=desp, updated_by_id=request.user.id)
+                company_id), keyshareholders_name=key, description=desp, updated_by_id=request.user.id, pdf_id=key_share_holder_pdf_page.id)
             ks.save()
 
     for nominee, desp in zip(director_nominee, director_nominee_description):
@@ -1511,7 +1549,7 @@ def fundparty_submit_form(request):
     for ceo_name, desp in zip(ceo, ceo_description):
         if ceo_name not in (None, ''):
             c = CompanyRepresentative(company_id=int(company_id), representative_name=ceo_name,
-                                      description=desp, designation='CEO', updated_by_id=request.user.id)
+                                      description=desp, designation='CEO', updated_by_id=request.user.id, pdf_id=ceo_pdf_page.id)
             c.save()
 
     for cfo_name, desp in zip(cfo, cfo_description):
@@ -1558,6 +1596,70 @@ def offering_details_submit_form(request):
     offer_status = post_data['offer_status']
     use_of_Proceeds = post_data['use_of_Proceeds']
     type_of_listing = post_data['type_of_listing']
+
+    use_of_Proceeds_pdf = post_data['use_of_Proceeds_pdf']
+    use_of_Proceeds_page_no = post_data['use_of_Proceeds_page_no']
+    pdf = PDFModel.objects.filter(path=use_of_Proceeds_pdf).first()
+    use_of_Proceeds_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=use_of_Proceeds_page_no)
+    use_of_Proceeds_pdf_page.save()
+
+    ipo_announcement_dt_pdf = post_data['ipo_announcement_dt_pdf']
+    ipo_announcement_dt_page_no = post_data['ipo_announcement_dt_page_no']
+    pdf = PDFModel.objects.filter(path=ipo_announcement_dt_pdf).first()
+    ipo_announcement_dt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=ipo_announcement_dt_page_no)
+    ipo_announcement_dt_pdf_page.save()
+
+    ipo_pr_announcement_dt_pdf = post_data['ipo_pr_announcement_dt_pdf']
+    ipo_pr_announcement_dt_page_no = post_data['ipo_pr_announcement_dt_page_no']
+    pdf = PDFModel.objects.filter(path=ipo_pr_announcement_dt_pdf).first()
+    ipo_pr_announcement_dt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=ipo_pr_announcement_dt_page_no)
+    ipo_pr_announcement_dt_pdf_page.save()
+
+    ipo_start_dt_pdf = post_data['ipo_start_dt_pdf']
+    ipo_start_dt_page_no = post_data['ipo_start_dt_page_no']
+    pdf = PDFModel.objects.filter(path=ipo_start_dt_pdf).first()
+    ipo_start_dt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=ipo_start_dt_page_no)
+    ipo_start_dt_pdf_page.save()
+
+    ipo_end_dt_pdf = post_data['ipo_end_dt_pdf']
+    ipo_end_dt_page_no = post_data['ipo_end_dt_page_no']
+    pdf = PDFModel.objects.filter(path=ipo_end_dt_pdf).first()
+    ipo_end_dt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=ipo_end_dt_page_no)
+    ipo_end_dt_pdf_page.save()
+
+    share_issue_dt_pdf = post_data['share_issue_dt_pdf']
+    share_issue_dt_page_no = post_data['share_issue_dt_page_no']
+    pdf = PDFModel.objects.filter(path=share_issue_dt_pdf).first()
+    share_issue_dt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=share_issue_dt_page_no)
+    share_issue_dt_pdf_page.save()
+
+    date_of_listing_pdf = post_data['date_of_listing_pdf']
+    date_of_listing_page_no = post_data['date_of_listing_page_no']
+    pdf = PDFModel.objects.filter(path=date_of_listing_pdf).first()
+    date_of_listing_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=date_of_listing_page_no)
+    date_of_listing_pdf_page.save()
+
+    postpone_date_pdf = post_data['postpone_date_pdf']
+    postpone_date_page_no = post_data['postpone_date_page_no']
+    pdf = PDFModel.objects.filter(path=postpone_date_pdf).first()
+    postpone_date_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=postpone_date_page_no)
+    postpone_date_pdf_page.save()
+
+    withdrawn_date_pdf = post_data['withdrawn_date_pdf']
+    withdrawn_date_page_no = post_data['withdrawn_date_page_no']
+    pdf = PDFModel.objects.filter(path=withdrawn_date_pdf).first()
+    withdrawn_date_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=withdrawn_date_page_no)
+    withdrawn_date_pdf_page.save()
+
     ipo_announcement_dt = post_data['ipo_announcement_dt']
     if ipo_announcement_dt is not None:
         ipo_announcement_dt = datetime.datetime.strptime(
@@ -1616,7 +1718,7 @@ def offering_details_submit_form(request):
     else:
         company_offering_id = post_data['tid']
 
-    offering_status_info = CompanyOfferingStatus(snapshot_date=snapshot_date, date_of_listing=date_of_listing, share_issue_date=share_issue_dt, offering_end_date=ipo_end_dt, offering_start_date=ipo_start_dt, postpone_date=postpone_date, withdrawn_date=withdrawn_date, offering_price_announcement_date=ipo_pr_announcement_dt,
+    offering_status_info = CompanyOfferingStatus(withdrawn_date_pdf_id=withdrawn_date_pdf_page.id, postpone_date_pdf_id=postpone_date_pdf_page.id, date_of_listing_pdf_id=date_of_listing_pdf_page.id, share_issue_date_pdf_id=share_issue_dt_pdf_page.id, offering_end_date_pdf_id=ipo_end_dt_pdf_page.id, offering_start_date_pdf_id=ipo_start_dt_pdf_page.id, offering_price_announcement_date_pdf_id=ipo_pr_announcement_dt_pdf_page.id, offering_announcement_date_pdf_id=ipo_announcement_dt_pdf_page.id, use_of_proceeds_pdf_id=use_of_Proceeds_pdf_page.id, snapshot_date=snapshot_date, date_of_listing=date_of_listing, share_issue_date=share_issue_dt, offering_end_date=ipo_end_dt, offering_start_date=ipo_start_dt, postpone_date=postpone_date, withdrawn_date=withdrawn_date, offering_price_announcement_date=ipo_pr_announcement_dt,
                                                  offering_announcement_date=ipo_announcement_dt, type_of_listing_id=type_of_listing, offer_status_id=offer_status, listing_status_id=listing_status, IPO_status_id=ipo_status, use_of_proceeds=use_of_Proceeds, company_offering_id=company_offering_id, updated_by_id=request.user.id)
     offering_status_info.save()
 

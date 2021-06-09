@@ -380,6 +380,23 @@
 			data['directors'] = Array.from(document.querySelectorAll('#id_directors')).map(el=> el.value)
 			data['directors_description'] = Array.from(document.querySelectorAll('#id_directors_description')).map(el=> el.value)
 
+
+			data['lead_underwriter_pdf'] = $('#id_lead_underwriter_pdf').val();
+			data['lead_underwriter_page_no'] = $('#id_lead_underwriter_page_no').val();
+
+			data['underwriter_pdf'] = $('#id_underwriter_pdf').val();
+			data['underwriter_page_no'] = $('#id_underwriter_page_no').val();
+
+			data['auditors_pdf'] = $('#id_auditors_pdf').val();
+			data['auditors_page_no'] = $('#id_auditors_page_no').val();
+
+			data['ceo_pdf'] = $('#id_ceo_pdf').val();
+			data['ceo_page_no'] = $('#id_ceo_page_no').val();
+
+			data['key_share_holder_pdf'] = $('#id_key_share_holder_pdf').val();
+			data['key_share_holder_page_no'] = $('#id_key_share_holder_page_no').val();
+
+
 			bootbox.confirm({
 			message: "Confirm Submit?",
 			buttons: {

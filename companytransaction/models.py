@@ -176,6 +176,25 @@ class CompanyOfferingShares(models.Model):
 
 
 class CompanyOfferingStatus(models.Model):
+    use_of_proceeds_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='use_of_proceeds_pdf', null=True)
+    offering_announcement_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='offering_announcement_date_pdf', null=True)
+    offering_price_announcement_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='offering_price_announcement_date_pdf', null=True)
+    offering_start_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='offering_start_date_pdf', null=True)
+    offering_end_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='offering_end_date_pdf', null=True)
+    share_issue_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='share_issue_date_pdf', null=True)
+    date_of_listing_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='date_of_listing_pdf', null=True)
+    postpone_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='postpone_date_pdf', null=True)
+    withdrawn_date_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='withdrawn_date_pdf', null=True)
+
     company_offering = models.ForeignKey(
         Offering, on_delete=models.PROTECT, null=True)
     listing_status = models.ForeignKey(
@@ -315,6 +334,7 @@ class CompanyOfferingFeesExpense(models.Model):
 
 class CompanyRepresentative(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFPage, on_delete=models.PROTECT, null=True)
     representative_name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
     description = models.CharField(max_length=1000)
@@ -342,6 +362,7 @@ class CompanyRepresentative(models.Model):
 
 class CompanyKeyshareholder(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFPage, on_delete=models.PROTECT, null=True)
     keyshareholders_name = models.CharField(max_length=255)
     description = models.CharField(max_length=1000)
     is_active = models.BooleanField(default=True)
@@ -369,6 +390,7 @@ class CompanyKeyshareholder(models.Model):
 class FundpartyLeadUnderwiter(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     fundparty = models.ForeignKey(Fundparty, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFPage, on_delete=models.PROTECT, null=True)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
@@ -394,6 +416,7 @@ class FundpartyLeadUnderwiter(models.Model):
 class FundPartyUnderwriter(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     fundparty = models.ForeignKey(Fundparty, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFPage, on_delete=models.PROTECT, null=True)
     offering = models.ForeignKey(
         CompanyOfferings, on_delete=models.PROTECT, null=True, blank=True)
     is_active = models.BooleanField(default=True)
@@ -446,6 +469,7 @@ class FundpartyUnderwiterCouncel(models.Model):
 class FundpartyAuditor(models.Model):
     company = models.ForeignKey(Company, on_delete=models.PROTECT)
     fundparty = models.ForeignKey(Fundparty, on_delete=models.PROTECT)
+    pdf = models.ForeignKey(PDFPage, on_delete=models.PROTECT, null=True)
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
     created_date = models.DateTimeField(editable=False)
