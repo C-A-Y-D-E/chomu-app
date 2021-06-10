@@ -1763,6 +1763,55 @@ def offering_shares_submit_form(request):
     lockup_period = post_data['lockup_period']
     ex_price_of_warants = post_data['ex_price_of_warants']
 
+    shares_offered_min_pdf = post_data['shares_offered_min_pdf']
+    shares_offered_min_page_no = post_data['shares_offered_min_page_no']
+    pdf = PDFModel.objects.filter(path=shares_offered_min_pdf).first()
+    shares_offered_min_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=shares_offered_min_page_no)
+    shares_offered_min_pdf_page.save()
+
+    offer_amount_min_pdf = post_data['offer_amount_min_pdf']
+    offer_amount_min_page_no = post_data['offer_amount_min_page_no']
+    pdf = PDFModel.objects.filter(path=offer_amount_min_pdf).first()
+    offer_amount_min_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=offer_amount_min_page_no)
+    offer_amount_min_pdf_page.save()
+
+    price_range_min_pdf = post_data['price_range_min_pdf']
+    price_range_min_page_no = post_data['price_range_min_page_no']
+    pdf = PDFModel.objects.filter(path=price_range_min_pdf).first()
+    price_range_min_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=price_range_min_page_no)
+    price_range_min_pdf_page.save()
+
+    registration_fee_pdf = post_data['registration_fee_pdf']
+    registration_fee_page_no = post_data['registration_fee_page_no']
+    pdf = PDFModel.objects.filter(path=registration_fee_pdf).first()
+    registration_fee_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=registration_fee_page_no)
+    registration_fee_pdf_page.save()
+
+    lockup_period_pdf = post_data['lockup_period_pdf']
+    lockup_period_page_no = post_data['lockup_period_page_no']
+    pdf = PDFModel.objects.filter(path=lockup_period_pdf).first()
+    lockup_period_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=lockup_period_page_no)
+    lockup_period_pdf_page.save()
+
+    quiet_period_expiration_pdf = post_data['quiet_period_expiration_pdf']
+    quiet_period_expiration_page_no = post_data['quiet_period_expiration_page_no']
+    pdf = PDFModel.objects.filter(path=quiet_period_expiration_pdf).first()
+    quiet_period_expiration_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=quiet_period_expiration_page_no)
+    quiet_period_expiration_pdf_page.save()
+
+    total_offering_exp_pdf = post_data['total_offering_exp_pdf']
+    total_offering_exp_page_no = post_data['total_offering_exp_page_no']
+    pdf = PDFModel.objects.filter(path=total_offering_exp_pdf).first()
+    total_offering_exp_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=total_offering_exp_page_no)
+    total_offering_exp_pdf_page.save()
+
     lockup_expiration = post_data['lockup_expiration']
     if lockup_expiration is not None:
         lockup_expiration = datetime.datetime.strptime(
@@ -1803,7 +1852,7 @@ def offering_shares_submit_form(request):
         company_offering_id = post_data['tid']
 
     # insert company offering shares related information
-    offering_share_info = CompanyOfferingShares(number_of_greenshoe_shares_issued=no_of_grreenshoe_sh_iss, greenshoe_option_exercise_date=greenshoe_opt_exercise_dt, shares_overalloted=shares_overalloted, number_of_shares_issued=no_of_shares_issued, quiet_period_expiration_date=quiet_period_expiration, lockup_expiration_date=lockup_expiration, lockup_period=lockup_period, shares_outstanding=shares_outstanding, shareholder_shares_offered=sh_shares_offered, proceeds_after_expense=proceeds_after_expense, underwriting_discount=underwriting_discount,
+    offering_share_info = CompanyOfferingShares(total_offering_exp_pdf_id=total_offering_exp_pdf_page.id, quiet_period_expiration_pdf_id=quiet_period_expiration_pdf_page.id, lockup_period_pdf_id=lockup_period_pdf_page.id, registration_fee_pdf_id=registration_fee_pdf_page.id, price_range_min_pdf_id=price_range_min_pdf_page.id, offer_amount_min_pdf_id=offer_amount_min_pdf_page.id, shares_offered_min_pdf_id=shares_offered_min_pdf_page.id, number_of_greenshoe_shares_issued=no_of_grreenshoe_sh_iss, greenshoe_option_exercise_date=greenshoe_opt_exercise_dt, shares_overalloted=shares_overalloted, number_of_shares_issued=no_of_shares_issued, quiet_period_expiration_date=quiet_period_expiration, lockup_expiration_date=lockup_expiration, lockup_period=lockup_period, shares_outstanding=shares_outstanding, shareholder_shares_offered=sh_shares_offered, proceeds_after_expense=proceeds_after_expense, underwriting_discount=underwriting_discount,
                                                 price_range_max=price_range_max, price_range_min=price_range_min, offer_amount_max=offer_amount_max, offer_amount_min=offer_amount_min, additional_shares_offered_aboveIPO=add_sh_off_above_ipo, strategic_shares_offered=strategic_shares_off, shares_offered_max=shares_offered_max, shares_offered_min=shares_offered_min, snapshot_date=snapshot_date, strategic_sale_offer_that_were_issued=shares_after_str, prospectus_link=prospectus_link, company_offering_id=company_offering_id, updated_by=request.user)
     offering_share_info.save()
 
@@ -1852,6 +1901,49 @@ def financial_submit_form(request):
     offering_id = post_data['offering']
     company_id = int(post_data['company'][0])
 
+    revenue_pdf = post_data['revenue_pdf']
+    revenue_page_no = post_data['revenue_page_no']
+    pdf = PDFModel.objects.filter(path=revenue_pdf).first()
+    revenue_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=revenue_page_no)
+    revenue_pdf_page.save()
+
+    last_12_month_sales_pdf = post_data['last_12_month_sales_pdf']
+    print(last_12_month_sales_pdf)
+    last_12_month_sales_page_no = post_data['last_12_month_sales_page_no']
+    pdf = PDFModel.objects.filter(path=last_12_month_sales_pdf).first()
+    last_12_month_sales_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=last_12_month_sales_page_no)
+    last_12_month_sales_pdf_page.save()
+
+    total_assets_pdf = post_data['total_assets_pdf']
+    total_assets_page_no = post_data['total_assets_page_no']
+    pdf = PDFModel.objects.filter(path=total_assets_pdf).first()
+    total_assets_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=total_assets_page_no)
+    total_assets_pdf_page.save()
+
+    cash_pdf = post_data['cash_pdf']
+    cash_page_no = post_data['cash_page_no']
+    pdf = PDFModel.objects.filter(path=cash_pdf).first()
+    cash_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=cash_page_no)
+    cash_pdf_page.save()
+
+    debt_pdf = post_data['debt_pdf']
+    debt_page_no = post_data['debt_page_no']
+    pdf = PDFModel.objects.filter(path=debt_pdf).first()
+    debt_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=debt_page_no)
+    debt_pdf_page.save()
+
+    equity_pdf = post_data['equity_pdf']
+    equity_page_no = post_data['equity_page_no']
+    pdf = PDFModel.objects.filter(path=equity_pdf).first()
+    equity_pdf_page = PDFPage(
+        pdf_id=pdf.id, page_no=equity_page_no)
+    equity_pdf_page.save()
+
     # if post_data has 'tid' (which is company offering mapping id) then update record with company_offering_id=tid (update form).
     # if 'tid' is not present in post_data it means need to make new entry by taking company_id and offering_id from Offering table for current user (add form)
     if 'tid' not in post_data.keys():
@@ -1861,7 +1953,7 @@ def financial_submit_form(request):
     else:
         company_offering_id = post_data['tid']
 
-    financial_info = CompanyFinancial(equity=equity, debt=debt, cash=cash, total_liabilities=total_liabilities, last_24_months_sales=last_24_month_sales, last_12_months_sales=last_12_month_sales, y_o_y_growth=y_o_y_growth,
+    financial_info = CompanyFinancial(equity_pdf_id=equity_pdf_page.id, debt_pdf_id=debt_pdf_page.id, cash_pdf_id=cash_pdf_page.id, total_assets_pdf_id=total_assets_pdf_page.id, last_12_month_sales_pdf_id=last_12_month_sales_pdf_page.id, revenue_pdf_id=revenue_pdf_page.id, equity=equity, debt=debt, cash=cash, total_liabilities=total_liabilities, last_24_months_sales=last_24_month_sales, last_12_months_sales=last_12_month_sales, y_o_y_growth=y_o_y_growth,
                                       ebitda=ebidta, ebit=ebit, net_income=net_income, revenue=revenue, snapshot_date=snapshot_date, total_assets=total_assets, company_offering_id=company_offering_id, updated_by=request.user)
     financial_info.save()
     return render(request, 'companymaster/addcompany_5.html', {'name': request.user.username})

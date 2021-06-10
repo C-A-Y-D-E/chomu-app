@@ -112,6 +112,23 @@ class IndustryCompany(models.Model):
 
 
 class CompanyOfferingShares(models.Model):
+    shares_offered_min_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='shares_offered_min_pdf')
+    offer_amount_min_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='offer_amount_min_pdf')
+    price_range_min_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='price_range_min_pdf')
+    registration_fee_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='registration_fee_pdf')
+    lockup_period_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='lockup_period_pdf')
+    quiet_period_expiration_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='quiet_period_expiration_pdf')
+    total_offering_exp_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, null=True, related_name='total_offering_exp_pdf')
+
+    company_offering = models.ForeignKey(
+        Offering, on_delete=models.PROTECT, null=True)
     company_offering = models.ForeignKey(
         Offering, on_delete=models.PROTECT, null=True)
     shares_offered_min = models.DecimalField(
@@ -239,6 +256,19 @@ class CompanyOfferingStatus(models.Model):
 
 
 class CompanyFinancial(models.Model):
+    revenue_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='revenue_pdf', null=True)
+    last_12_month_sales_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='last_12_month_sales', null=True)
+    total_assets_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='total_assets_pdf', null=True)
+    cash_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='cash_pdf', null=True)
+    debt_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='debt_pdf', null=True)
+    equity_pdf = models.ForeignKey(
+        PDFPage, on_delete=models.PROTECT, related_name='equity_pdf', null=True)
+
     company_offering = models.ForeignKey(
         Offering, on_delete=models.PROTECT, null=True)
     snapshot_date = models.DateField(null=True, blank=True)

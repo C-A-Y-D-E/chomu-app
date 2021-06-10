@@ -323,6 +323,24 @@
 			data['offering'] = $("#id_offering").val();
 			data['company'] = $("#id_company").val();
 
+			data['revenue_pdf'] = $("#id_revenue_pdf").val();
+			data['revenue_page_no'] = $("#id_revenue_page_no").val();
+
+			data['last_12_month_sales_pdf'] = $("#id_last_12_month_sales_pdf").val();
+			data['last_12_month_sales_page_no'] = $("#id_last_12_month_sales_page_no").val();
+
+			data['total_assets_pdf'] = $("#id_total_assets_pdf").val();
+			data['total_assets_page_no'] = $("#id_total_assets_page_no").val();
+
+			data['cash_pdf'] = $("#id_cash_pdf").val();
+			data['cash_page_no'] = $("#id_cash_page_no").val();
+
+			data['debt_pdf'] = $("#id_debt_pdf").val();
+			data['debt_page_no'] = $("#id_debt_page_no").val();
+			
+			data['equity_pdf'] = $("#id_equity_pdf").val();
+			data['equity_page_no'] = $("#id_equity_page_no").val();
+
 			bootbox.confirm({
 			message: "Confirm Submit?",
 			buttons: {
@@ -358,6 +376,42 @@
 			make_warning_alert("warning","Mandatory fields are required.")
 		}
 	}
+</script>
+
+<script>
+function addPDF(){
+	 start_loading();
+		file = $('#pdf_file')[0].files[0]
+		uri = $('#pdf_uri').val()
+		
+		filename = $('#uploadfilename').val()
+		var form = new FormData();
+		form.append('filename',filename);
+		form.append('file',file)
+		form.append('uri',uri)
+		 form.append('action', 'add-pdf')
+        form.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+		   $.ajax({ 
+			url: '{% url "addpdf" %}',
+			method: 'POST',
+			cache: false,
+              processData: false,
+              contentType: false,
+              enctype: 'multipart/form-data',
+			data: form,
+			success: function (data) {
+				stop_loading();
+				make_alert("success","PDF uploaded successfully !");
+			},
+			error: function (jqXHR, status, err) {
+				stop_loading();
+				make_warning_alert("danger","Sorry, Something went wrong.");
+			},
+		});  
+		
+}
+
 </script>
 
 <script>

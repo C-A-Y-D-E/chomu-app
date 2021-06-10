@@ -496,6 +496,32 @@
 			data['offering'] = $("#id_offering").val();
 			data['company'] = $("#id_company").val();
 
+			data['shares_offered_min_pdf'] = $("#id_shares_offered_min_pdf").val();
+			data['shares_offered_min_page_no'] = $("#id_shares_offered_min_page_no").val();
+
+			data['offer_amount_min_pdf'] = $("#id_offer_amount_min_pdf").val();
+			data['offer_amount_min_page_no'] = $("#id_offer_amount_min_page_no").val();
+			
+			data['price_range_min_pdf'] = $("#id_price_range_min_pdf").val();
+			data['price_range_min_page_no'] = $("#id_price_range_min_page_no").val();
+			
+			data['registration_fee_pdf'] = $("#id_registration_fee_pdf").val();
+			data['registration_fee_page_no'] = $("#id_registration_fee_page_no").val();
+			
+			data['lockup_period_pdf'] = $("#id_lockup_period_pdf").val();
+			data['lockup_period_page_no'] = $("#id_lockup_period_page_no").val();
+
+			data['quiet_period_expiration_page_no'] = $("#id_quiet_period_expiration_page_no").val();
+			data['quiet_period_expiration_pdf'] = $("#id_quiet_period_expiration_pdf").val();
+			
+			data['total_offering_exp_page_no'] = $("#id_total_offering_exp_page_no").val();
+			data['total_offering_exp_pdf'] = $("#id_total_offering_exp_pdf").val();
+			
+			
+			
+			
+
+			
 		bootbox.confirm({
 			message: "Confirm Submit?",
 			buttons: {
@@ -544,6 +570,42 @@ parent.querySelector('.fr a').href = e.target.value
 
 })
 })
+</script>
+
+<script>
+function addPDF(){
+	 start_loading();
+		file = $('#pdf_file')[0].files[0]
+		uri = $('#pdf_uri').val()
+		
+		filename = $('#uploadfilename').val()
+		var form = new FormData();
+		form.append('filename',filename);
+		form.append('file',file)
+		form.append('uri',uri)
+		 form.append('action', 'add-pdf')
+        form.append('csrfmiddlewaretoken', '{{ csrf_token }}')
+
+		   $.ajax({ 
+			url: '{% url "addpdf" %}',
+			method: 'POST',
+			cache: false,
+              processData: false,
+              contentType: false,
+              enctype: 'multipart/form-data',
+			data: form,
+			success: function (data) {
+				stop_loading();
+				make_alert("success","PDF uploaded successfully !");
+			},
+			error: function (jqXHR, status, err) {
+				stop_loading();
+				make_warning_alert("danger","Sorry, Something went wrong.");
+			},
+		});  
+		
+}
+
 </script>
 
 <style>
