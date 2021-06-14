@@ -538,17 +538,17 @@ def add_offering_financial(request):
 
 def addcompany_2_extraField(request, company_id):
     company_share_holder = CompanyKeyshareholder.objects.filter(
-        company=company_id).values('keyshareholders_name', 'description')
+        company=company_id).values('keyshareholders_name', 'description', 'id')
     company_nominee = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director Nominee').values('representative_name', 'description')
+        company=company_id, designation='Director Nominee').values('representative_name', 'description', 'id')
     company_ceo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CEO').values('representative_name', 'description')
+        company=company_id, designation='CEO').values('representative_name', 'description', 'id')
     company_cfo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CFO').values('representative_name', 'description')
+        company=company_id, designation='CFO').values('representative_name', 'description', 'id')
     company_chairmen = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Chair. of B. Direc').values('representative_name', 'description')
+        company=company_id, designation='Chair. of B. Direc').values('representative_name', 'description', 'id')
     company_director = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director').values('representative_name', 'description')
+        company=company_id, designation='Director').order_by('-updated_date').values('representative_name', 'description', 'id')
     return JsonResponse({'keyshare': list(company_share_holder), 'nominees': list(company_nominee), 'ceo': list(company_ceo), 'cfo': list(company_cfo), 'chairmens': list(company_chairmen), 'directors': list(company_director)})
 
 
@@ -582,15 +582,15 @@ def addcompany2_update(request):
     directors = post_data['directors']
     directors_description = post_data['directors_description']
     print(lead_underwriter)
-    FundpartyLeadUnderwiter.objects.filter(company_id=int(company_id)).delete()
-    FundPartyUnderwriter.objects.filter(company_id=int(company_id)).delete()
-    FundpartyUnderwiterCouncel.objects.filter(
-        company_id=int(company_id)).delete()
-    FundpartyAuditor.objects.filter(company_id=int(company_id)).delete()
-    FundpartyTransferAgent.objects.filter(company_id=int(company_id)).delete()
-    FundpartyCompanyCouncel.objects.filter(company_id=int(company_id)).delete()
-    CompanyKeyshareholder.objects.filter(company_id=int(company_id)).delete()
-    CompanyRepresentative.objects.filter(company_id=int(company_id)).delete()
+    # FundpartyLeadUnderwiter.objects.filter(company_id=int(company_id)).delete()
+    # FundPartyUnderwriter.objects.filter(company_id=int(company_id)).delete()
+    # FundpartyUnderwiterCouncel.objects.filter(
+    #     company_id=int(company_id)).delete()
+    # FundpartyAuditor.objects.filter(company_id=int(company_id)).delete()
+    # FundpartyTransferAgent.objects.filter(company_id=int(company_id)).delete()
+    # FundpartyCompanyCouncel.objects.filter(company_id=int(company_id)).delete()
+    # CompanyKeyshareholder.objects.filter(company_id=int(company_id)).delete()
+    # CompanyRepresentative.objects.filter(company_id=int(company_id)).delete()
 
     print(CompanyRepresentative.objects.filter(company_id=int(company_id)))
     print('----------------------------')
@@ -1345,6 +1345,7 @@ def company_submit_form(request):
 
         # 2-6-21
         issuer_names_pdf = post_data['issuer_names_pdf']
+        print(issuer_names_pdf)
         issuer_names_page_no = post_data['issuer_names_page_no']
         pdf = PDFModel.objects.filter(path=issuer_names_pdf).first()
         issuer_pdf_page = PDFPage(pdf_id=pdf.id, page_no=issuer_names_page_no)

@@ -13,7 +13,7 @@ class CompanyInfoForm(ModelForm):
     issuer_names = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'dtfc form-control'}))
     issuer_names_pdf = forms.ModelChoiceField(queryset=PDFModel.objects.all(), to_field_name='path', widget=forms.Select(
-        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file'}))
+        attrs={'class': 'dtfc selectpicker floating-select whe pdf-file issuer'}))
     issuer_names_page_no = forms.IntegerField(widget=forms.NumberInput(
         attrs={'class': 'dtfc form-control page-no'}))
     no_of_employees = forms.IntegerField(
@@ -117,7 +117,7 @@ class FundPartyForm(ModelForm):
     ceo_description = forms.CharField(widget=forms.Textarea(
         attrs={'class': 'form-control', 'rows': 3}))
     cfo = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'dtfc form-control'}))
+        attrs={'class': 'dtfc form-control', 'data': id}))
     cfo_description = forms.CharField(widget=forms.Textarea(
         attrs={'class': 'form-control', 'rows': 3}))
     key_share_holder = forms.CharField(

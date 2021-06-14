@@ -145,7 +145,7 @@
 
 			<div class="col-md-4 col-sm-3 col-xs-6 fcc " id='director'>
 				<div class="form-group">
-					<label for="usr">Directors</label>
+					<label  for="usr">Directors</label>
 					{{form2.directors}}
 					<!-- <input class="dtfc form-control" type="text" placeholder="Type..." /> -->
 				</div>
@@ -264,39 +264,47 @@
 <!----------page-container-------------->
 <script>
 
-const createNode = (el,data)=>{
-		item = el.cloneNode(true);
+const createNode = (id,data)=>{
+		
 		data.slice(1).map(director=>{
+		let d = Array.from(document.querySelectorAll(id))
+		let el = d[d.length-1];
+		item = el.cloneNode(true);
+		console.log(director)
 		item.querySelector('input').value = director.representative_name ?? director.keyshareholders_name
-		item.querySelector('textarea').value = director.description
-		item.querySelector('.sc').classList.add('delete')
-		item.querySelector('.sc a').innerText= 'Delete'
+		item.querySelector('input').setAttribute('data',director.id)
+		item.querySelector('textarea').innerText = director.description
+		if(item.querySelector('.sc')){
+			item.querySelector('.sc').classList.add('delete')
+		item.querySelector('.sc a').innerText = 'Delete'
 		const deleteBtn = item.querySelector('.delete')
 		deleteBtn.classList.remove('sc')
+		}
+		
 		insertAfter(item,el)
 
 	})
 }
 $.get('{% url "addcompany_2_extraField" company_id=companyID %}', function( {directors,chairmens,nominees,keyshare,ceo,cfo} ) {
   	
-	console.log(directors)
+	console.log(directors,'director')
 	const dir = document.getElementById('director');
-	createNode(dir,directors)
+	createNode('#director',directors)
   
 	const chair = document.getElementById('charimen');
-	createNode(chair,chairmens)
+	createNode('#charimen',chairmens)
 	
 	const normi = document.getElementById('nominee');
-	createNode(normi,nominees)
+	createNode('#nominee',nominees)
 	
 	const ceo_el = document.getElementById('ceo');
-	createNode(ceo_el,ceo)
+	createNode('#ceo',ceo)
 	
 	const cfo_el = document.getElementById('cfo');
-	createNode(cfo_el,cfo)
+	createNode('#cfo',cfo)
 	
 	const key = document.getElementById('key-share');
-	createNode(key,keyshare)
+	createNode('#key-share',keyshare)
 	
 	
 	const deleteBtns = document.querySelectorAll('.delete')
@@ -343,6 +351,7 @@ $.get('{% url "addcompany_2_extraField" company_id=companyID %}', function( {dir
 			// removing sc class because it has add field event
 			deleteBtn.classList.remove('sc')
 			deleteBtn.addEventListener('click',function(){
+
 				// removing element container when click on delete field
 				deleteBtn.parentNode.parentNode.remove(true)
 			})
@@ -365,17 +374,29 @@ $.get('{% url "addcompany_2_extraField" company_id=companyID %}', function( {dir
 			data['comp_counsel'] = $('#id_comp_counsel').val();
 			data['director_nominee'] = Array.from(document.querySelectorAll('#id_director_nominee')).map(el=> el.value)
 			data['director_nominee_description'] = Array.from(document.querySelectorAll('#id_director_nominee_description')).map(el=> el.value)
+			data['director_id'] = Array.from(document.querySelectorAll('#id_director_nominee')).map(el=> el.getAttribute("data"))
+			
 			data['key_share_holder'] = Array.from(document.querySelectorAll('#id_key_share_holder')).map(el=> el.value)
 			data['key_share_holder_description'] = Array.from(document.querySelectorAll('#id_key_share_holder_description')).map(el=> el.value)			
+			data['key_share_id'] = Array.from(document.querySelectorAll('#id_key_share_holder')).map(el=> el.getAttribute("data"))
+			
 			data['ceo'] = Array.from(document.querySelectorAll('#id_ceo')).map(el=> el.value)
 			data['ceo_description'] = Array.from(document.querySelectorAll('#id_ceo_description')).map(el=> el.value)
+			data['ceo_id'] = Array.from(document.querySelectorAll('#id_ceo')).map(el=> el.getAttribute("data"))
+			
 			data['cfo'] = Array.from(document.querySelectorAll('#id_cfo')).map(el=> el.value)
 			data['cfo_description'] = Array.from(document.querySelectorAll('#id_cfo_description')).map(el=> el.value)
+			data['cfo_id'] = Array.from(document.querySelectorAll('#id_cfo')).map(el=> el.getAttribute("data"))
+			
 			data['chair_dir'] = Array.from(document.querySelectorAll('#id_chair_dir')).map(el=> el.value)
 			data['chair_dir_description'] = Array.from(document.querySelectorAll('#id_chair_dir_description')).map(el=> el.value)
+			data['chair_dir'] = Array.from(document.querySelectorAll('#id_chair_dir')).map(el=> el.getAttribute("data"))
+			
 			data['directors'] = Array.from(document.querySelectorAll('#id_directors')).map(el=> el.value)
 			data['directors_description'] = Array.from(document.querySelectorAll('#id_directors_description')).map(el=> el.value)
-
+			data['directors_id'] = Array.from(document.querySelectorAll('#id_directors')).map(el=> el.getAttribute("data"))
+			
+			console.log(data,'')
 			bootbox.confirm({
 			message: "Confirm Submit?",
 			buttons: {

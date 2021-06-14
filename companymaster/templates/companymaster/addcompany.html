@@ -52,244 +52,7 @@
   </div>
 
   
-<div class="modal fade" id="pdf-upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <h4 class="modal-title">Add</h4>
-		  <button type="button" class="close" data-dismiss="modal">
-			<i class="icofont-close-circled"></i>
-		  </button>
-		  
-		</div>
-		<div class="modal-body">
-			<div class="container-fluid">
-			<!-- Issue Name-->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Issuer Name PDF</label>
-							{% if companyID %}
-							{{form.issuer_names_pdf | attr:"readonly:true"}}
-							{% else %}
-							{{form.issuer_names_pdf}}
-							{% endif %}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#exampleModal" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Issuer Name Page No</label>
-							{% if companyID %}
-							{{form.issuer_names_page_no | attr:"readonly:true"}}
-							{% else %}
-							{{form.issuer_names_page_no}}
-							{% endif %}
-							<div class="fr"><a href="{% static 'asset/pdf.pdf' %}" download=""><i class="icofont-file-pdf"></i>
-									View PDF </a></div>
-						</div>
-					</div>
 
-				</div>
-			<!-- Country -->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Country PDF</label>
-							<div class="line"></div>
-								{{form.country_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Country PDF</label>
-							<div class="line"></div>
-								{{form.country_page_no}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-
-					</div>
-			
-
-				</div>
-			<!-- business -->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Business PDF</label>
-							<div class="line"></div>
-								{{form.business_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Business Page No</label>
-							<div class="line"></div>
-								{{form.business_page_no}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-			<!-- Address -->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Address PDF</label>
-							<div class="line"></div>
-								{{form.address_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Address Page No</label>
-							<div class="line"></div>
-								{{form.address_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			
-			<!-- exchange -->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Exchange PDF</label>
-							<div class="line"></div>
-								{{form.exchange_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Exchange Page No</label>
-							<div class="line"></div>
-								{{form.exchange_page_no}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			
-			<!-- Symbol -->
-				<div class="row">
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Symbol PDF</label>
-							<div class="line"></div>
-								{{form.symbol_pdf}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 ml-auto">
-						<div class="form-group">
-							<label class='required-field'>Symbol Page No</label>
-							<div class="line"></div>
-								{{form.symbol_page_no}}
-							<div class="fr" style='display:flex; justify-content:space-between;width:100%;align-items:center'>
-								<a href="" style='flex:1' target="_new" ><i class="icofont-file-pdf"></i>
-									View PDF 
-								</a>
-								<a style='cursor:pointer;' data-toggle="modal" data-target="#pdf-upload" type="button" ><i class="icofont-add"></i>
-									Add PDF
-								</a>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-			
-			
-			</div>
-  		</div>
-		
-
-		<div class="modal-footer">
-		  {% comment %} <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> {% endcomment %}
-		  <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
-		</div>
-	  </div>
-	</div>
-  </div>
 
 <!-- MODAL END -->
 <div class="container-fluid" id="contentmaindiv">
@@ -639,9 +402,13 @@ $(function(){
 <script>
 	function submitForm() {
 		
-		 if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){
+		 {% comment %} if($("#id_issuer_names").val() && $("#id_symbol").val() && $("#id_currency").val() && $("#id_country").val()){ {% endcomment %}
 			var url = "{% url 'company_submit_form' %}";
 			var data = {};
+
+			data['issuer_names_pdf'] = $('#id_issuer_names_pdf').val();
+			data['issuer_names_page_no'] = $('#id_issuer_names_page_no').val();
+			
 			data['issuer_names'] = $("#id_issuer_names").val();
 			data['no_of_employees'] = $("#id_no_of_employees").val();
 			data['currency'] = $("#id_currency").val();
@@ -666,9 +433,8 @@ $(function(){
 			data['MIC_Code'] = $("#id_MIC_Code").val();
 
 			// 2-6-21
-
-			data['issuer_names_pdf'] = $('#id_issuer_names_pdf').val();
-			data['issuer_names_page_no'] = $('#id_issuer_names_page_no').val();
+			
+			
 
 			data['country_pdf'] = $('#id_country_pdf').val();
 			data['country_page_no'] = $('#id_country_page_no').val();
@@ -684,7 +450,7 @@ $(function(){
 
 			data['symbol_pdf'] = $('#id_symbol_pdf').val();
 			data['symbol_page_no'] = $('#id_symbol_page_no').val();
-
+			console.log(data)
 			bootbox.confirm({
 			message: "Confirm Submit?",
 			buttons: {
@@ -722,9 +488,9 @@ $(function(){
 				}
 			}
 			});
-		 }else{
+		 {% comment %} }else{
 			make_warning_alert("warning","Mandatory fields are required.")
-		} 
+		}  {% endcomment %}
 	}
 
 	function Update() {
@@ -801,7 +567,7 @@ $(function(){
 
 <script>
 
-let pdfFilesEl = Array.from(document.querySelectorAll('.pdf-file'))
+let pdfFilesEl = Array.from(document.querySelectorAll('.pdf-file')) 
 {% comment %} let pageNumbersEl = Array.from(document.querySelectorAll('.page-no'))
 pdfFilesEl.forEach((el,index)=>{
 
@@ -839,7 +605,7 @@ parent.querySelector('.fr a').href = e.target.value
 
 
 })
-})
+}) 
 
 
 </script>
