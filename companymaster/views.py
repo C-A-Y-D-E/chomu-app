@@ -538,17 +538,17 @@ def add_offering_financial(request):
 
 def addcompany_2_extraField(request, company_id):
     company_share_holder = CompanyKeyshareholder.objects.filter(
-        company=company_id).values('keyshareholders_name', 'description', 'id')
+        company=company_id, is_active=True).values('keyshareholders_name', 'description', 'id')
     company_nominee = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director Nominee').values('representative_name', 'description', 'id')
+        company=company_id, is_active=True, designation='Director Nominee').values('representative_name', 'description', 'id')
     company_ceo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CEO').values('representative_name', 'description', 'id')
+        company=company_id, is_active=True, designation='CEO').values('representative_name', 'description', 'id')
     company_cfo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CFO').values('representative_name', 'description', 'id')
+        company=company_id, is_active=True, designation='CFO').values('representative_name', 'description', 'id')
     company_chairmen = CompanyRepresentative.objects.filter(
         company=company_id, designation='Chair. of B. Direc').values('representative_name', 'description', 'id')
     company_director = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director').order_by('-updated_date').values('representative_name', 'description', 'id')
+        company=company_id, is_active=True, designation='Director').values('representative_name', 'description', 'id')
     return JsonResponse({'keyshare': list(company_share_holder), 'nominees': list(company_nominee), 'ceo': list(company_ceo), 'cfo': list(company_cfo), 'chairmens': list(company_chairmen), 'directors': list(company_director)})
 
 
@@ -582,15 +582,54 @@ def addcompany2_update(request):
     directors = post_data['directors']
     directors_description = post_data['directors_description']
     print(lead_underwriter)
-    # FundpartyLeadUnderwiter.objects.filter(company_id=int(company_id)).delete()
-    # FundPartyUnderwriter.objects.filter(company_id=int(company_id)).delete()
-    # FundpartyUnderwiterCouncel.objects.filter(
-    #     company_id=int(company_id)).delete()
-    # FundpartyAuditor.objects.filter(company_id=int(company_id)).delete()
-    # FundpartyTransferAgent.objects.filter(company_id=int(company_id)).delete()
-    # FundpartyCompanyCouncel.objects.filter(company_id=int(company_id)).delete()
-    # CompanyKeyshareholder.objects.filter(company_id=int(company_id)).delete()
-    # CompanyRepresentative.objects.filter(company_id=int(company_id)).delete()
+    fundleadold = FundpartyLeadUnderwiter.objects.filter(
+        company_id=int(company_id))
+    for f in fundleadold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    underwriterold = FundPartyUnderwriter.objects.filter(
+        company_id=int(company_id))
+    for f in underwriterold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+
+    undercouncilold = FundpartyUnderwiterCouncel.objects.filter(
+        company_id=int(company_id))
+    for f in undercouncilold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    auditorold = FundpartyAuditor.objects.filter(company_id=int(company_id))
+    for f in auditorold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    agentold = FundpartyTransferAgent.objects.filter(
+        company_id=int(company_id))
+    for f in agentold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    companycoulold = FundpartyCompanyCouncel.objects.filter(
+        company_id=int(company_id))
+    for f in companycoulold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    keyold = CompanyKeyshareholder.objects.filter(
+        company_id=int(company_id))
+    for f in keyold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
+    rold = CompanyRepresentative.objects.filter(
+        company_id=int(company_id))
+    for f in rold:
+        f.is_active = False
+        f.is_deleted = True
+        f.save()
 
     print(CompanyRepresentative.objects.filter(company_id=int(company_id)))
     print('----------------------------')
@@ -680,18 +719,18 @@ def addcompany_2_updateView(request, company_id):
     agent = FundpartyTransferAgent.objects.filter(company=company_id).first()
     comp = FundpartyCompanyCouncel.objects.filter(company=company_id).first()
     company_share_holder = CompanyKeyshareholder.objects.filter(
-        company=company_id).first()
+        company=company_id, is_active=True).first()
     company_nominee = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director Nominee').first()
+        company=company_id, is_active=True,  designation='Director Nominee').first()
     company_ceo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CEO').first()
+        company=company_id, is_active=True,  designation='CEO').first()
     company_cfo = CompanyRepresentative.objects.filter(
-        company=company_id, designation='CFO').first()
+        company=company_id, is_active=True,  designation='CFO').first()
     company_chairmen = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Chair. of B. Direc').first()
+        company_id=company_id, is_active=True,  designation='Chair. of B. Direc').first()
     company_director = CompanyRepresentative.objects.filter(
-        company=company_id, designation='Director').first()
-
+        company=company_id, is_active=True,  designation='Director').first()
+    print(company_chairmen)
     initialData = {
         'company': company_id,
         'lead_underwriter': lead.fundparty,
@@ -1499,41 +1538,29 @@ def fundparty_submit_form(request):
         pdf_id=pdf.id, page_no=key_share_holder_page_no)
     key_share_holder_pdf_page.save()
 
-    for lead in lead_underwriter:
-        if lead not in (None, ''):
-            lead_r = FundpartyLeadUnderwiter(company_id=int(
-                company_id), fundparty_id=int(lead), pdf_id=lead_underwriter_pdf_page.id, updated_by_id=request.user.id)
-            lead_r.save()
+    lead_r = FundpartyLeadUnderwiter(company_id=int(
+        company_id), fundparty_id=int(lead_underwriter), pdf_id=lead_underwriter_pdf_page.id, updated_by_id=request.user.id)
+    lead_r.save()
 
-    for writer in underwriter:
-        if writer not in (None, ''):
-            w = FundPartyUnderwriter(company_id=int(company_id), fundparty_id=int(
-                writer), updated_by_id=request.user.id, pdf_id=underwriter_pdf_page.id)
-            w.save()
+    w = FundPartyUnderwriter(company_id=int(company_id), fundparty_id=int(
+        underwriter), updated_by_id=request.user.id, pdf_id=underwriter_pdf_page.id)
+    w.save()
 
-    for councel in u_counsel:
-        if councel not in (None, ''):
-            uc = FundpartyUnderwiterCouncel(company_id=int(
-                company_id), fundparty_id=int(councel), updated_by_id=request.user.id)
-            uc.save()
+    uc = FundpartyUnderwiterCouncel(company_id=int(
+        company_id), fundparty_id=int(u_counsel), updated_by_id=request.user.id)
+    uc.save()
 
-    for auditor in auditors:
-        if auditor not in (None, ''):
-            a = FundpartyAuditor(company_id=int(company_id), fundparty_id=int(
-                auditor), updated_by_id=request.user.id, pdf_id=auditors_pdf_page.id)
-            a.save()
+    a = FundpartyAuditor(company_id=int(company_id), fundparty_id=int(
+        auditors), updated_by_id=request.user.id, pdf_id=auditors_pdf_page.id)
+    a.save()
 
-    for agent in transfer_agent:
-        if agent not in (None, ''):
-            ta = FundpartyTransferAgent(company_id=int(
-                company_id), fundparty_id=int(agent), updated_by_id=request.user.id)
-            ta.save()
+    ta = FundpartyTransferAgent(company_id=int(
+        company_id), fundparty_id=int(transfer_agent), updated_by_id=request.user.id)
+    ta.save()
 
-    for comp in comp_counsel:
-        if comp not in (None, ''):
-            cc = FundpartyCompanyCouncel(company_id=int(
-                company_id), fundparty_id=int(comp), updated_by_id=request.user.id)
-            cc.save()
+    cc = FundpartyCompanyCouncel(company_id=int(
+        company_id), fundparty_id=int(comp_counsel), updated_by_id=request.user.id)
+    cc.save()
 
     for key, desp in zip(key_share_holder, key_share_holder_description):
         if key not in (None, ''):

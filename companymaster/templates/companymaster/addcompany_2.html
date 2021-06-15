@@ -360,13 +360,13 @@
 		if($("#id_company").val()){
 			var url = "{% url 'fundparty_submit_form' %}";
 			var data = {};
-			data['company'] = $("#id_company").val();
-			data['lead_underwriter'] = $("#id_lead_underwriter").val();
-			data['underwriter'] = $('#id_underwriter').val();
-			data['u_counsel'] = $('#id_u_counsel').val();
-			data['auditors'] = $('#id_auditors').val();
-			data['transfer_agent'] = $('#id_transfer_agent').val();
-			data['comp_counsel'] = $('#id_comp_counsel').val();
+			data['company'] = document.querySelector("#id_company").value
+			data['lead_underwriter'] = document.querySelector("#id_lead_underwriter").value
+			data['underwriter'] = document.querySelector('#id_underwriter').value
+			data['u_counsel'] = document.querySelector('#id_u_counsel').value
+			data['auditors'] = document.querySelector('#id_auditors').value
+			data['transfer_agent'] = document.querySelector('#id_transfer_agent').value
+			data['comp_counsel'] = document.querySelector('#id_comp_counsel').value
 			data['director_nominee'] = Array.from(document.querySelectorAll('#id_director_nominee')).map(el=> el.value)
 			data['director_nominee_description'] = Array.from(document.querySelectorAll('#id_director_nominee_description')).map(el=> el.value)
 			data['key_share_holder'] = Array.from(document.querySelectorAll('#id_key_share_holder')).map(el=> el.value)
@@ -380,7 +380,7 @@
 			data['directors'] = Array.from(document.querySelectorAll('#id_directors')).map(el=> el.value)
 			data['directors_description'] = Array.from(document.querySelectorAll('#id_directors_description')).map(el=> el.value)
 
-
+			console.log(data)
 			data['lead_underwriter_pdf'] = $('#id_lead_underwriter_pdf').val();
 			data['lead_underwriter_page_no'] = $('#id_lead_underwriter_page_no').val();
 
